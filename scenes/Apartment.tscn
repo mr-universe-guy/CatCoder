@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b2t5ucovmif1x"]
+
+[ext_resource type="PackedScene" uid="uid://d1t5pldkkuk46" path="res://scenes/facility/Apartment_01.gltf" id="1_pfxeq"]
+[ext_resource type="PackedScene" uid="uid://btk7uhu55a7ki" path="res://mobs/neoetta.tscn" id="2_44656"]
+
+[node name="Node3D" type="Node3D" unique_id=1460746340]
+
+[node name="blockbench_export" parent="." unique_id=1273682764 instance=ExtResource("1_pfxeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018727303, 0, 0.51877975)
+
+[node name="Camera_Pos" type="Node3D" parent="." unique_id=246444251]
+transform = Transform3D(0.672948, 0, 0.7396898, 0, 1, 0, -0.7396898, 0, 0.672948, 3.8861122, 4.0307555, 2.5683343)
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Pos" unique_id=1205814323]
+transform = Transform3D(0.9937718, -0.0706796, 0.08615093, -7.450581e-09, 0.77311015, 0.63427186, -0.11143422, -0.6303215, 0.768295, 0, 0, 0)
+
+[node name="Neoetta" parent="." unique_id=619864078 instance=ExtResource("2_44656")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
