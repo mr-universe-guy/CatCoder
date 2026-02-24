@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://btk7uhu55a7ki"]
 
+[ext_resource type="Script" uid="uid://b1ktbbb7owuma" path="res://mobs/neoetta.gd" id="1_hyw2a"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfxeq"]
 
 [node name="Neoetta" type="CharacterBody3D" unique_id=619864078]
+script = ExtResource("1_hyw2a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=509073303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
