@@ -1,18 +1,147 @@
 [gd_scene format=3 uid="uid://b2t5ucovmif1x"]
 
-[ext_resource type="PackedScene" uid="uid://d1t5pldkkuk46" path="res://scenes/facility/Apartment_01.gltf" id="1_pfxeq"]
 [ext_resource type="PackedScene" uid="uid://btk7uhu55a7ki" path="res://mobs/neoetta.tscn" id="2_44656"]
+[ext_resource type="PackedScene" uid="uid://magurtcl7el6" path="res://assets/kenney/space_station/bed-double-cover.glb" id="3_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://biphqyw81yfw8" path="res://assets/kenney/space_station/bed-double.glb" id="4_c34uo"]
+[ext_resource type="PackedScene" uid="uid://7ui0gtt3sefe" path="res://assets/wall_switch.tscn" id="4_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://b0pfab5d6jfmy" path="res://assets/door.tscn" id="5_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://qmy2g2dmli0d" path="res://assets/kenney/space_station/door-single-half.glb" id="6_2mva0"]
+[ext_resource type="PackedScene" uid="uid://wrai7r6u5j40" path="res://assets/kenney/space_station/wall-window-shutters.glb" id="10_7lhm0"]
+[ext_resource type="PackedScene" uid="uid://img3i1ufqoa1" path="res://assets/chair.tscn" id="10_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://dlrnd7xkgh6st" path="res://assets/kenney/space_station/table.glb" id="12_jpx4l"]
+[ext_resource type="PackedScene" uid="uid://k6pvxs8fpuky" path="res://assets/kenney/space_station/computer-wide.glb" id="12_kb4dp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kb4dp"]
+size = Vector3(2.3843994, 1.4067383, 2.9660645)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7lhm0"]
+size = Vector3(1.786377, 2.3046265, 0.8897095)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y6bmb"]
+size = Vector3(3.2367249, 1.2175293, 1.7728119)
 
 [node name="Node3D" type="Node3D" unique_id=1460746340]
-
-[node name="blockbench_export" parent="." unique_id=1273682764 instance=ExtResource("1_pfxeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018727303, 0, 0.51877975)
 
 [node name="Camera_Pos" type="Node3D" parent="." unique_id=246444251]
 transform = Transform3D(0.672948, 0, 0.7396898, 0, 1, 0, -0.7396898, 0, 0.672948, 3.8861122, 4.0307555, 2.5683343)
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Pos" unique_id=1205814323]
-transform = Transform3D(0.9937718, -0.0706796, 0.08615093, -7.450581e-09, 0.77311015, 0.63427186, -0.11143422, -0.6303215, 0.768295, 0, 0, 0)
+transform = Transform3D(0.9937718, -0.070679575, 0.086150885, -7.450581e-09, 0.77311015, 0.63427186, -0.11143419, -0.6303216, 0.76829505, -1.0937135, 4.7683716e-07, 2.2162824)
 
 [node name="Neoetta" parent="." unique_id=619864078 instance=ExtResource("2_44656")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.330987, 0, 1.0901651)
+
+[node name="Bed" type="Node3D" parent="." unique_id=1051334023]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.655399, 4.7683716e-07, -0.9127535)
+
+[node name="bed-double2" parent="Bed" unique_id=1663244026 instance=ExtResource("4_c34uo")]
+transform = Transform3D(0.80686176, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="bed-double-cover2" parent="Bed/bed-double2" unique_id=1763087485 instance=ExtResource("3_y6bmb")]
+transform = Transform3D(0.9999998, 0, -1.0658141e-14, 0, 0.9999997, 0, -1.4210855e-14, 0, 0.9999997, -0.7196878, 0.59591323, 0.4597547)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Bed" unique_id=1776869001]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bed/StaticBody3D" unique_id=549211127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005432248, 0.20336914, -0.008666992)
+shape = SubResource("BoxShape3D_kb4dp")
+
+[node name="door-switch" parent="." unique_id=337373988 instance=ExtResource("4_y6bmb")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.050492, 0.7746775, 1.8945361)
+
+[node name="door" parent="." unique_id=1688423834 instance=ExtResource("5_y6bmb")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.260734, 0, 2.745284)
+
+[node name="door-restroom" parent="." unique_id=1798753042 instance=ExtResource("6_2mva0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2573248, 0, 0.5487056)
+
+[node name="floor" type="CSGBox3D" parent="." unique_id=1650174237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
+use_collision = true
+size = Vector3(7, 1, 7.6850586)
+
+[node name="wall_int_1" type="CSGBox3D" parent="." unique_id=1120919034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3077576, 2.547882, 0.49928784)
+use_collision = true
+size = Vector3(2, 0.90423584, 0.25)
+
+[node name="wall_int_8" type="CSGBox3D" parent="." unique_id=83926597]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0885193, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_9" type="CSGBox3D" parent="." unique_id=1021870039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103154, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_3" type="CSGBox3D" parent="." unique_id=1737895725]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, -0.16160387)
+use_collision = true
+size = Vector3(4.6474304, 3, 0.25)
+
+[node name="wall_int_5" type="CSGBox3D" parent="." unique_id=64560750]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, 4.25639)
+use_collision = true
+size = Vector3(1.8489075, 3, 0.25)
+
+[node name="wall_int_4" type="CSGBox3D" parent="." unique_id=1627589232]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, -2.4126408)
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_6" type="CSGBox3D" parent="." unique_id=1720243448]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, 5.0971327)
+visible = false
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_7" type="CSGBox3D" parent="." unique_id=891926306]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.38242, 1.5, 1.397738)
+visible = false
+use_collision = true
+size = Vector3(7.54245, 3, 0.25)
+
+[node name="wall_int_2" type="CSGBox3D" parent="." unique_id=1732600501]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.30775768, 1.5, -0.86744875)
+use_collision = true
+size = Vector3(3, 3, 0.25)
+
+[node name="Dresser" type="Node3D" parent="." unique_id=273372203]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.692184, 0, 1.5864046)
+
+[node name="Dresser" parent="Dresser" unique_id=1032747432 instance=ExtResource("10_7lhm0")]
+transform = Transform3D(1, 0, 4.2632564e-14, 0, 1.4999999, 0, 0, 0, 2.9999998, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Dresser" unique_id=1713202611]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser/StaticBody3D" unique_id=989911591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032958984, 0.65231323, -0.003326416)
+shape = SubResource("BoxShape3D_7lhm0")
+
+[node name="table" parent="." unique_id=712705795 instance=ExtResource("12_jpx4l")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 2.1417074, 0, 4.0209045)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="table" unique_id=1480849589]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="table/StaticBody3D" unique_id=490002630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0042877197, 0.60339355, 0.0012283325)
+shape = SubResource("BoxShape3D_y6bmb")
+
+[node name="computer-wide2" parent="." unique_id=1265002201 instance=ExtResource("12_kb4dp")]
+transform = Transform3D(-1.1313341e-08, 0.9659258, 0.25881907, 4.222196e-08, 0.25881907, -0.9659258, -1, 0, -4.371139e-08, -0.7211158, 2, -0.91597277)
+
+[node name="DarkLight" type="DirectionalLight3D" parent="." unique_id=900027207]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5.9427853, 2.0440392)
+light_color = Color(0.071608335, 0.058499996, 0.13, 1)
+sky_mode = 1
+
+[node name="chair" parent="." unique_id=1727251046 instance=ExtResource("10_y6bmb")]
+transform = Transform3D(-0.50458795, 0, -0.8633603, 0, 1, 0, 0.8633603, 0, -0.50458795, 3.660362, 0, 3.9164605)
+
+[node name="chair2" parent="." unique_id=1576107095 instance=ExtResource("10_y6bmb")]
+transform = Transform3D(-0.39581797, 0, 0.918329, 0, 1, 0, -0.918329, 0, -0.39581797, 0.5628324, 0, 4.2809567)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1277807234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 2)
+light_color = Color(0.3199525, 0.439519, 0.39368522, 1)

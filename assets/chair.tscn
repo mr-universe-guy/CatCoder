@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://img3i1ufqoa1"]
+
+[ext_resource type="PackedScene" uid="uid://b3gwb03bisycc" path="res://assets/kenney/space_station/chair.glb" id="1_y5mtj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_36836"]
+size = Vector3(0.9013672, 1.6898193, 1)
+
+[node name="chair" unique_id=1727251046 instance=ExtResource("1_y5mtj")]
+
+[node name="body" type="StaticBody3D" parent="." index="0" unique_id=1806389470]
+
+[node name="shape" type="CollisionShape3D" parent="body" index="0" unique_id=1426014763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0043945313, 0.81903076, 0)
+shape = SubResource("BoxShape3D_36836")

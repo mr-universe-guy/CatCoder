@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b0pfab5d6jfmy"]
+
+[ext_resource type="PackedScene" uid="uid://cnn83cqx5bhh5" path="res://assets/kenney/space_station/door-single-closed.glb" id="1_7g2qk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpx4l"]
+size = Vector3(1.1585693, 2.586914, 0.28082275)
+
+[node name="door" type="Node3D" unique_id=1688423834]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="door-exterior" parent="." unique_id=1797586549 instance=ExtResource("1_7g2qk")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=175215099]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=939364880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014953613, 0.79345703, 0.0010681152)
+shape = SubResource("BoxShape3D_jpx4l")

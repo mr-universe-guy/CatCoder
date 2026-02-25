@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://7ui0gtt3sefe"]
+
+[ext_resource type="PackedScene" uid="uid://bumb8mavl0b65" path="res://assets/kenney/space_station/wall-switch.glb" id="1_mkgmv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mkgmv"]
+size = Vector3(0.15, 0.3, 0.2)
+
+[node name="wall-switch2" unique_id=337373988 instance=ExtResource("1_mkgmv")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=974426860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30438924, 0)
+mesh = SubResource("BoxMesh_mkgmv")
