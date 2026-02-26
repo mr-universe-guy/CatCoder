@@ -1,18 +1,42 @@
 [gd_scene format=3 uid="uid://btk7uhu55a7ki"]
 
-[ext_resource type="Script" uid="uid://b1ktbbb7owuma" path="res://mobs/neoetta.gd" id="1_hyw2a"]
+[ext_resource type="Script" uid="uid://b1ktbbb7owuma" path="res://mobs/player.gd" id="1_hyw2a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfxeq"]
 radius = 0.4
 height = 1.4
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_hyw2a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymn04"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.9365926, 1.5786887e-05, 0.62527496, 0.2509804)
+
 [node name="Neoetta" type="CharacterBody3D" unique_id=619864078]
+collision_layer = 2
 script = ExtResource("1_hyw2a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=509073303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("CapsuleShape3D_pfxeq")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=818511290]
+[node name="Vis" type="CSGCylinder3D" parent="." unique_id=818511290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 height = 1.4
+
+[node name="InteractArea" type="Area3D" parent="." unique_id=1133778851]
+collision_layer = 4
+collision_mask = 4
+
+[node name="InteractShape" type="CollisionShape3D" parent="InteractArea" unique_id=1515537742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.838024, -0.7934911)
+shape = SubResource("SphereShape3D_hyw2a")
+
+[node name="InteractVis" type="CSGSphere3D" parent="InteractArea/InteractShape" unique_id=1327912]
+material = SubResource("StandardMaterial3D_ymn04")
+
+[connection signal="area_entered" from="InteractArea" to="." method="_on_interact_entered"]
+[connection signal="area_exited" from="InteractArea" to="." method="_on_interact_exited"]
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_exited"]

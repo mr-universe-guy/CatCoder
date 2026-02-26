@@ -1,12 +1,26 @@
 [gd_scene format=3 uid="uid://7ui0gtt3sefe"]
 
 [ext_resource type="PackedScene" uid="uid://bumb8mavl0b65" path="res://assets/kenney/space_station/wall-switch.glb" id="1_mkgmv"]
+[ext_resource type="Script" uid="uid://bom6hplwg7yvh" path="res://scripts/interactable.gd" id="2_1tbwk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mkgmv"]
 size = Vector3(0.15, 0.3, 0.2)
 
-[node name="wall-switch2" unique_id=337373988 instance=ExtResource("1_mkgmv")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_mkgmv"]
+size = Vector3(0.3408203, 0.5999756, 0.4814453)
+
+[node name="wall-switch" unique_id=337373988 instance=ExtResource("1_mkgmv")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=974426860]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30438924, 0)
 mesh = SubResource("BoxMesh_mkgmv")
+
+[node name="Area3D" type="Area3D" parent="." index="2" unique_id=1373948292]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_1tbwk")
+display_text = "Switch"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=680622288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2941387, 0)
+shape = SubResource("BoxShape3D_mkgmv")
