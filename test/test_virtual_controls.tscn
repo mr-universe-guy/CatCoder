@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cqaa3frb80y1x"]
+
+[ext_resource type="Script" uid="uid://5r4akuecfwpd" path="res://test/test_virtual_controls.gd" id="1_fuy6t"]
+[ext_resource type="PackedScene" uid="uid://bbjpxo4peiywv" path="res://scenes/ui/touch_ui.tscn" id="2_6bqdj"]
+
+[node name="test_virtual_controls" type="Control" unique_id=294737520]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_fuy6t")
+
+[node name="touch-ui" parent="." unique_id=57452118 instance=ExtResource("2_6bqdj")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=412983441]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 888.0
+offset_top = 48.0
+offset_right = 1088.0
+offset_bottom = 88.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="x_axis" type="ProgressBar" parent="VBoxContainer" unique_id=478383757]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+
+[node name="y_axis" type="ProgressBar" parent="VBoxContainer" unique_id=1674878645]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
