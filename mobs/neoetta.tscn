@@ -38,6 +38,7 @@ shape = SubResource("SphereShape3D_hyw2a")
 material = SubResource("StandardMaterial3D_ymn04")
 
 [node name="touch-ui" parent="." unique_id=57452118 instance=ExtResource("2_ymn04")]
+visible = false
 
 [connection signal="area_entered" from="InteractArea" to="." method="_on_interact_entered"]
 [connection signal="area_exited" from="InteractArea" to="." method="_on_interact_exited"]

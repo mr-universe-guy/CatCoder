@@ -1,4 +1,7 @@
 extends Control
 
-func _process(_delta: float) -> void:
-	pass
+func _ready() -> void:
+	if DisplayServer.is_touchscreen_available():
+		show()
+	else:
+		hide()
