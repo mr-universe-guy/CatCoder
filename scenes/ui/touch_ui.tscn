@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pvgyc1l0nexf" path="res://scenes/ui/touch_ui.gd" id="1_dta07"]
 [ext_resource type="PackedScene" uid="uid://f2wslj6moalj" path="res://scenes/ui/joy_circle.tscn" id="2_1j606"]
+[ext_resource type="Texture2D" uid="uid://d1wq4lwo0kyfk" path="res://assets/kenney/ui/button_circle.png" id="3_dta07"]
 
 [node name="touch-ui" type="Control" unique_id=57452118]
 layout_mode = 3
@@ -22,3 +23,24 @@ action_x_pos = "move_right"
 action_x_neg = "move_left"
 action_y_pos = "move_forward"
 action_y_neg = "move_back"
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=234629464]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -258.0
+offset_top = -243.0
+offset_right = -54.0
+offset_bottom = -57.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Button_A" type="TouchScreenButton" parent="CenterContainer" unique_id=417485685]
+modulate = Color(17.994186, 0, 10.885259, 1)
+position = Vector2(96, 82)
+texture_normal = ExtResource("3_dta07")
+texture_pressed = ExtResource("3_dta07")
+action = "interact"

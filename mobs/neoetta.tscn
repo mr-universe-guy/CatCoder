@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://btk7uhu55a7ki"]
 
 [ext_resource type="Script" uid="uid://b1ktbbb7owuma" path="res://mobs/player.gd" id="1_hyw2a"]
+[ext_resource type="PackedScene" uid="uid://bbjpxo4peiywv" path="res://scenes/ui/touch_ui.tscn" id="2_ymn04"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfxeq"]
 radius = 0.4
@@ -35,6 +36,8 @@ shape = SubResource("SphereShape3D_hyw2a")
 
 [node name="InteractVis" type="CSGSphere3D" parent="InteractArea/InteractShape" unique_id=1327912]
 material = SubResource("StandardMaterial3D_ymn04")
+
+[node name="touch-ui" parent="." unique_id=57452118 instance=ExtResource("2_ymn04")]
 
 [connection signal="area_entered" from="InteractArea" to="." method="_on_interact_entered"]
 [connection signal="area_exited" from="InteractArea" to="." method="_on_interact_exited"]
