@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://7ui0gtt3sefe" path="res://assets/wall_switch.tscn" id="4_y6bmb"]
 [ext_resource type="PackedScene" uid="uid://b0pfab5d6jfmy" path="res://assets/door.tscn" id="5_y6bmb"]
 [ext_resource type="PackedScene" uid="uid://qmy2g2dmli0d" path="res://assets/kenney/space_station/door-single-half.glb" id="6_2mva0"]
+[ext_resource type="Script" uid="uid://dy66y8foy3ryh" path="res://scripts/toggle_move.gd" id="6_7lhm0"]
+[ext_resource type="Script" uid="uid://bom6hplwg7yvh" path="res://scripts/interactable.gd" id="7_7lhm0"]
 [ext_resource type="PackedScene" uid="uid://wrai7r6u5j40" path="res://assets/kenney/space_station/wall-window-shutters.glb" id="10_7lhm0"]
 [ext_resource type="PackedScene" uid="uid://img3i1ufqoa1" path="res://assets/chair.tscn" id="10_y6bmb"]
 [ext_resource type="PackedScene" uid="uid://dlrnd7xkgh6st" path="res://assets/kenney/space_station/table.glb" id="12_jpx4l"]
@@ -13,6 +15,9 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kb4dp"]
 size = Vector3(2.3843994, 1.4067383, 2.9660645)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpx4l"]
+size = Vector3(1.234314, 2.0975952, 0.31793213)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7lhm0"]
 size = Vector3(1.786377, 2.3046265, 0.8897095)
@@ -52,8 +57,22 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.0
 [node name="door" parent="." unique_id=1688423834 instance=ExtResource("5_y6bmb")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.260734, 0, 2.745284)
 
-[node name="door-restroom" parent="." unique_id=1798753042 instance=ExtResource("6_2mva0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2573248, 0, 0.5487056)
+[node name="swinging_door" type="Node3D" parent="." unique_id=1213228548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8547724, 0, 0.5487056)
+script = ExtResource("6_7lhm0")
+toggle_transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.8547724, 0, 0.5487056)
+
+[node name="door" parent="swinging_door" unique_id=1798753042 instance=ExtResource("6_2mva0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6007675, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="swinging_door/door" unique_id=1949636592]
+collision_layer = 5
+collision_mask = 2
+script = ExtResource("7_7lhm0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="swinging_door/door/StaticBody3D" unique_id=1265168144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0047912598, 1.0526428, 0.007171631)
+shape = SubResource("BoxShape3D_jpx4l")
 
 [node name="floor" type="CSGBox3D" parent="." unique_id=1650174237]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
@@ -145,3 +164,5 @@ transform = Transform3D(-0.39581797, 0, 0.918329, 0, 1, 0, -0.918329, 0, -0.3958
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1277807234]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 2)
 light_color = Color(0.3199525, 0.439519, 0.39368522, 1)
+
+[connection signal="interacted" from="swinging_door/door/StaticBody3D" to="swinging_door" method="_on_interact"]
