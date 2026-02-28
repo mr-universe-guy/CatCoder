@@ -1,0 +1,537 @@
+[gd_scene format=3 uid="uid://b2t5ucovmif1x"]
+
+[ext_resource type="PackedScene" uid="uid://btk7uhu55a7ki" path="res://mobs/neoetta.tscn" id="2_44656"]
+[ext_resource type="PackedScene" uid="uid://magurtcl7el6" path="res://assets/kenney/space_station/bed-double-cover.glb" id="3_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://biphqyw81yfw8" path="res://assets/kenney/space_station/bed-double.glb" id="4_c34uo"]
+[ext_resource type="PackedScene" uid="uid://7ui0gtt3sefe" path="res://assets/wall_switch.tscn" id="4_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://b0pfab5d6jfmy" path="res://assets/door.tscn" id="5_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://qmy2g2dmli0d" path="res://assets/kenney/space_station/door-single-half.glb" id="6_2mva0"]
+[ext_resource type="Script" uid="uid://dy66y8foy3ryh" path="res://scripts/toggle_move.gd" id="6_7lhm0"]
+[ext_resource type="Script" uid="uid://bom6hplwg7yvh" path="res://scripts/interactable.gd" id="7_7lhm0"]
+[ext_resource type="PackedScene" uid="uid://wrai7r6u5j40" path="res://assets/kenney/space_station/wall-window-shutters.glb" id="10_7lhm0"]
+[ext_resource type="PackedScene" uid="uid://img3i1ufqoa1" path="res://assets/chair.tscn" id="10_y6bmb"]
+[ext_resource type="PackedScene" uid="uid://dlrnd7xkgh6st" path="res://assets/kenney/space_station/table.glb" id="12_jpx4l"]
+[ext_resource type="PackedScene" uid="uid://k6pvxs8fpuky" path="res://assets/kenney/space_station/computer-wide.glb" id="12_kb4dp"]
+[ext_resource type="Script" uid="uid://cdlifgsq1q35q" path="res://scripts/cam_switcher.gd" id="13_7lpee"]
+[ext_resource type="Material" uid="uid://br35j38wonrjh" path="res://assets/materials/blocker.tres" id="14_xxdgh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6gy86"]
+size = Vector2(4.25, 23)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kb4dp"]
+size = Vector3(2.3843994, 1.4067383, 2.9660645)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpx4l"]
+size = Vector3(1.234314, 2.0975952, 0.31793213)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7lhm0"]
+size = Vector3(1.786377, 2.3046265, 0.8897095)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y6bmb"]
+size = Vector3(3.2367249, 1.2175293, 1.7728119)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0btv"]
+size = Vector3(5.7723083, 3.369629, 3.8305054)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xxdgh"]
+size = Vector3(4.038555, 3.369629, 3.2432709)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7lpee"]
+size = Vector3(1.6098633, 2.5602417, 1.4793701)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7lpee"]
+size = Vector2(2, 2.88)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xxdgh"]
+size = Vector2(7, 7.75)
+
+[node name="Node3D" type="Node3D" unique_id=1460746340]
+
+[node name="Hallway" type="Node3D" parent="." unique_id=1083912731]
+
+[node name="hallway_layout" type="Node3D" parent="Hallway" unique_id=1938437626]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Hallway/hallway_layout" unique_id=340611124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, -6.5)
+size = Vector3(4, 1, 24)
+
+[node name="blocker_hallway" type="MeshInstance3D" parent="Hallway" unique_id=691761282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5070968, 2.8686066, -6.2630463)
+visible = false
+material_override = ExtResource("14_xxdgh")
+mesh = SubResource("PlaneMesh_6gy86")
+
+[node name="Room_01" type="Node3D" parent="." unique_id=933229856]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Neoetta" parent="Room_01" unique_id=619864078 instance=ExtResource("2_44656")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.330987, 0, 1.0901651)
+
+[node name="Bed" type="Node3D" parent="Room_01" unique_id=1051334023]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.655399, 4.7683716e-07, -0.9127535)
+
+[node name="bed-double2" parent="Room_01/Bed" unique_id=1663244026 instance=ExtResource("4_c34uo")]
+transform = Transform3D(0.80686176, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="bed-double-cover2" parent="Room_01/Bed/bed-double2" unique_id=1763087485 instance=ExtResource("3_y6bmb")]
+transform = Transform3D(0.9999998, 0, -1.0658141e-14, 0, 0.9999997, 0, -1.4210855e-14, 0, 0.9999997, -0.7196878, 0.59591323, 0.4597547)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_01/Bed" unique_id=1776869001]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_01/Bed/StaticBody3D" unique_id=549211127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005432248, 0.20336914, -0.008666992)
+shape = SubResource("BoxShape3D_kb4dp")
+
+[node name="door-switch" parent="Room_01" unique_id=337373988 instance=ExtResource("4_y6bmb")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.050492, 0.7746775, 1.8945361)
+
+[node name="door" parent="Room_01" unique_id=1688423834 instance=ExtResource("5_y6bmb")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.260734, 0, 2.745284)
+
+[node name="bathroom_door" type="Node3D" parent="Room_01" unique_id=1213228548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8547724, 0, 0.5487056)
+script = ExtResource("6_7lhm0")
+toggle_transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.8547724, 0, 0.5487056)
+
+[node name="door" parent="Room_01/bathroom_door" unique_id=1798753042 instance=ExtResource("6_2mva0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6007675, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_01/bathroom_door/door" unique_id=1949636592]
+collision_layer = 5
+collision_mask = 2
+script = ExtResource("7_7lhm0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_01/bathroom_door/door/StaticBody3D" unique_id=1265168144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0047912598, 1.0526428, 0.007171631)
+shape = SubResource("BoxShape3D_jpx4l")
+
+[node name="Dresser" type="Node3D" parent="Room_01" unique_id=273372203]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.692184, 0, 1.5864046)
+
+[node name="Dresser" parent="Room_01/Dresser" unique_id=1032747432 instance=ExtResource("10_7lhm0")]
+transform = Transform3D(1, 0, 4.2632564e-14, 0, 1.4999999, 0, 0, 0, 2.9999998, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_01/Dresser" unique_id=1713202611]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_01/Dresser/StaticBody3D" unique_id=989911591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032958984, 0.65231323, -0.003326416)
+shape = SubResource("BoxShape3D_7lhm0")
+
+[node name="table" parent="Room_01" unique_id=712705795 instance=ExtResource("12_jpx4l")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 2.1417074, 0, 4.0209045)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Room_01/table" unique_id=1480849589]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_01/table/StaticBody3D" unique_id=490002630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0042877197, 0.60339355, 0.0012283325)
+shape = SubResource("BoxShape3D_y6bmb")
+
+[node name="computer-wide2" parent="Room_01" unique_id=1265002201 instance=ExtResource("12_kb4dp")]
+transform = Transform3D(-1.1313341e-08, 0.9659258, 0.25881907, 4.222196e-08, 0.25881907, -0.9659258, -1, 0, -4.371139e-08, -0.7211158, 2, -0.91597277)
+
+[node name="DarkLight" type="DirectionalLight3D" parent="Room_01" unique_id=900027207]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5.9427853, 2.0440392)
+light_color = Color(0.071608335, 0.058499996, 0.13, 1)
+sky_mode = 1
+
+[node name="chair" parent="Room_01" unique_id=1727251046 instance=ExtResource("10_y6bmb")]
+transform = Transform3D(-0.50458795, 0, -0.8633603, 0, 1, 0, 0.8633603, 0, -0.50458795, 3.660362, 0, 3.9164605)
+
+[node name="chair2" parent="Room_01" unique_id=1576107095 instance=ExtResource("10_y6bmb")]
+transform = Transform3D(-0.39581797, 0, 0.918329, 0, 1, 0, -0.918329, 0, -0.39581797, 0.5628324, 0, 4.2809567)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room_01" unique_id=1277807234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 2)
+light_color = Color(0.3199525, 0.439519, 0.39368522, 1)
+
+[node name="apt_room_cam_area" type="Area3D" parent="Room_01" unique_id=102481937]
+collision_layer = 8
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_01/apt_room_cam_area" unique_id=805254642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2068917, 1.1848145, 2.9909344)
+shape = SubResource("BoxShape3D_j0btv")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Room_01/apt_room_cam_area" unique_id=1872228135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0737686, 1.1848145, -0.44114113)
+shape = SubResource("BoxShape3D_xxdgh")
+
+[node name="room_cam" type="Camera3D" parent="Room_01" unique_id=1205814323 node_paths=PackedStringArray("show_on_activate", "hide_on_activate")]
+transform = Transform3D(0.58633, -0.5138061, 0.62627506, -7.450581e-09, 0.77311003, 0.634272, -0.8100723, -0.37189266, 0.45329764, 4.789461, 4.030756, 4.868786)
+script = ExtResource("13_7lpee")
+show_on_activate = [NodePath("../blocker_bathroom"), NodePath("../../Hallway/blocker_hallway")]
+hide_on_activate = [NodePath("../../Room_06/apt_room_layout/wall_int_6"), NodePath("../../Room_06/apt_room_layout/wall_int_7")]
+
+[node name="apt_bathroom_cam_area" type="Area3D" parent="Room_01" unique_id=1676181403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7782013, 0, -1.0517384)
+collision_layer = 8
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room_01/apt_bathroom_cam_area" unique_id=1140430518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46749723, 1.2843037, 0.23968506)
+shape = SubResource("BoxShape3D_7lpee")
+
+[node name="bathroom_cam" type="Camera3D" parent="Room_01" unique_id=1650713884]
+transform = Transform3D(-0.7071068, -0.5873269, 0.39376023, 0, 0.5568611, 0.8306056, -0.7071068, 0.5873269, -0.39376023, -0.51358616, 3.6726992, -1.8554606)
+script = ExtResource("13_7lpee")
+
+[node name="blocker_bathroom" type="MeshInstance3D" parent="Room_01" unique_id=2107054824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3237858, 2.8686066, -0.9504408)
+visible = false
+material_override = ExtResource("14_xxdgh")
+mesh = SubResource("PlaneMesh_7lpee")
+
+[node name="apt_room_layout" type="Node3D" parent="Room_01" unique_id=1535357971]
+
+[node name="floor" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=1650174237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
+use_collision = true
+size = Vector3(7, 1, 7.6850586)
+
+[node name="wall_int_1" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=1120919034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3077576, 2.547882, 0.49928784)
+use_collision = true
+size = Vector3(2, 0.90423584, 0.25)
+
+[node name="wall_int_8" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=83926597]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0885193, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_9" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=1021870039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103154, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_3" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=1737895725]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, -0.16160387)
+use_collision = true
+size = Vector3(4.6474304, 3, 0.25)
+
+[node name="wall_int_5" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=64560750]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, 4.25639)
+use_collision = true
+size = Vector3(1.8489075, 3, 0.25)
+
+[node name="wall_int_4" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=1627589232]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, -2.4126408)
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_6" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=1720243448]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, 5.0971327)
+visible = false
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_7" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=891926306]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.38242, 1.5, 1.397738)
+visible = false
+use_collision = true
+size = Vector3(7.54245, 3, 0.25)
+
+[node name="wall_int_2" type="CSGBox3D" parent="Room_01/apt_room_layout" unique_id=1732600501]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.30775768, 1.5, -0.86744875)
+use_collision = true
+size = Vector3(3, 3, 0.25)
+
+[node name="Room_02" type="Node3D" parent="." unique_id=1108512863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -7.75)
+
+[node name="apt_room_layout" type="Node3D" parent="Room_02" unique_id=1432764150]
+
+[node name="floor" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=1203084919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
+use_collision = true
+size = Vector3(7, 1, 7.6850586)
+
+[node name="wall_int_1" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=1393901731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3077576, 2.547882, 0.49928784)
+use_collision = true
+size = Vector3(2, 0.90423584, 0.25)
+
+[node name="wall_int_8" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=309250866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0885193, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_9" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=38202745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103154, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_3" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=1400431401]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, -0.16160387)
+use_collision = true
+size = Vector3(4.6474304, 3, 0.25)
+
+[node name="wall_int_5" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=1763473616]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, 4.25639)
+use_collision = true
+size = Vector3(1.8489075, 3, 0.25)
+
+[node name="wall_int_4" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=1291210463]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, -2.4126408)
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_6" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=292529983]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, 5.0971327)
+visible = false
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_7" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=595781826]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.38242, 1.5, 1.397738)
+visible = false
+use_collision = true
+size = Vector3(7.54245, 3, 0.25)
+
+[node name="wall_int_2" type="CSGBox3D" parent="Room_02/apt_room_layout" unique_id=1292725531]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.30775768, 1.5, -0.86744875)
+use_collision = true
+size = Vector3(3, 3, 0.25)
+
+[node name="blocker_room" type="MeshInstance3D" parent="Room_02" unique_id=879076822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2038279, 2.8686066, 1.4869535)
+material_override = ExtResource("14_xxdgh")
+mesh = SubResource("PlaneMesh_xxdgh")
+
+[node name="Room_03" type="Node3D" parent="." unique_id=456532114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -15.5)
+
+[node name="apt_room_layout" type="Node3D" parent="Room_03" unique_id=1847938716]
+
+[node name="floor" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=746860080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
+use_collision = true
+size = Vector3(7, 1, 7.6850586)
+
+[node name="wall_int_1" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=685810505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3077576, 2.547882, 0.49928784)
+use_collision = true
+size = Vector3(2, 0.90423584, 0.25)
+
+[node name="wall_int_8" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=391130030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0885193, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_9" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=1445253625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103154, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_3" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=2047362696]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, -0.16160387)
+use_collision = true
+size = Vector3(4.6474304, 3, 0.25)
+
+[node name="wall_int_5" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=37491608]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, 4.25639)
+use_collision = true
+size = Vector3(1.8489075, 3, 0.25)
+
+[node name="wall_int_4" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=1306830744]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, -2.4126408)
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_6" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=396555938]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, 5.0971327)
+visible = false
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_7" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=2133450822]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.38242, 1.5, 1.397738)
+visible = false
+use_collision = true
+size = Vector3(7.54245, 3, 0.25)
+
+[node name="wall_int_2" type="CSGBox3D" parent="Room_03/apt_room_layout" unique_id=1481095131]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.30775768, 1.5, -0.86744875)
+use_collision = true
+size = Vector3(3, 3, 0.25)
+
+[node name="blocker_room" type="MeshInstance3D" parent="Room_03" unique_id=2055772682]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2038279, 2.8686066, 1.4869537)
+material_override = ExtResource("14_xxdgh")
+mesh = SubResource("PlaneMesh_xxdgh")
+
+[node name="Room_04" type="Node3D" parent="." unique_id=2015732498]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.0000002, 0, -5.5)
+
+[node name="apt_room_layout" type="Node3D" parent="Room_04" unique_id=1755935633]
+
+[node name="floor" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=1099589995]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
+use_collision = true
+size = Vector3(7, 1, 7.6850586)
+
+[node name="wall_int_1" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=397878320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3077576, 2.547882, 0.49928784)
+use_collision = true
+size = Vector3(2, 0.90423584, 0.25)
+
+[node name="wall_int_8" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=594715734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0885193, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_9" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=1240065953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103154, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_3" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=2051249638]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, -0.16160387)
+use_collision = true
+size = Vector3(4.6474304, 3, 0.25)
+
+[node name="wall_int_5" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=1753833008]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, 4.25639)
+use_collision = true
+size = Vector3(1.8489075, 3, 0.25)
+
+[node name="wall_int_4" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=1403136539]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, -2.4126408)
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_6" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=2044226552]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, 5.0971327)
+visible = false
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_7" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=1887946847]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.38242, 1.5, 1.397738)
+visible = false
+use_collision = true
+size = Vector3(7.54245, 3, 0.25)
+
+[node name="wall_int_2" type="CSGBox3D" parent="Room_04/apt_room_layout" unique_id=1856902679]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.30775768, 1.5, -0.86744875)
+use_collision = true
+size = Vector3(3, 3, 0.25)
+
+[node name="Room_05" type="Node3D" parent="." unique_id=903752715]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.0000002, 0, -13.25)
+
+[node name="apt_room_layout" type="Node3D" parent="Room_05" unique_id=1056020757]
+
+[node name="floor" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=1120112907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
+use_collision = true
+size = Vector3(7, 1, 7.6850586)
+
+[node name="wall_int_1" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=1155057905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3077576, 2.547882, 0.49928784)
+use_collision = true
+size = Vector3(2, 0.90423584, 0.25)
+
+[node name="wall_int_8" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=2044752892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0885193, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_9" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=706677656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103154, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_3" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=615493370]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, -0.16160387)
+use_collision = true
+size = Vector3(4.6474304, 3, 0.25)
+
+[node name="wall_int_5" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=1542929107]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, 4.25639)
+use_collision = true
+size = Vector3(1.8489075, 3, 0.25)
+
+[node name="wall_int_4" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=1674691736]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, -2.4126408)
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_6" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=905384297]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, 5.0971327)
+visible = false
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_7" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=1629117139]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.38242, 1.5, 1.397738)
+visible = false
+use_collision = true
+size = Vector3(7.54245, 3, 0.25)
+
+[node name="wall_int_2" type="CSGBox3D" parent="Room_05/apt_room_layout" unique_id=313989022]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.30775768, 1.5, -0.86744875)
+use_collision = true
+size = Vector3(3, 3, 0.25)
+
+[node name="Room_06" type="Node3D" parent="." unique_id=1695075918]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.0000017, 0, 2.25)
+
+[node name="apt_room_layout" type="Node3D" parent="Room_06" unique_id=1890367605]
+
+[node name="floor" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=1121222360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, 1.3425293)
+use_collision = true
+size = Vector3(7, 1, 7.6850586)
+
+[node name="wall_int_1" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=1801329979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3077576, 2.547882, 0.49928784)
+use_collision = true
+size = Vector3(2, 0.90423584, 0.25)
+
+[node name="wall_int_8" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=1993578053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0885193, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_9" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=244738734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103154, 1.0470495, 0.49928784)
+use_collision = true
+size = Vector3(0.43847656, 2.1132507, 0.25)
+
+[node name="wall_int_3" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=175427409]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, -0.16160387)
+use_collision = true
+size = Vector3(4.6474304, 3, 0.25)
+
+[node name="wall_int_5" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=1993202083]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3077576, 1.5, 4.25639)
+use_collision = true
+size = Vector3(1.8489075, 3, 0.25)
+
+[node name="wall_int_4" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=859100606]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, -2.4126408)
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_6" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=1405008860]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0368559, 1.5, 5.0971327)
+visible = false
+use_collision = true
+size = Vector3(6.908142, 3, 0.25)
+
+[node name="wall_int_7" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=1929097221]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.38242, 1.5, 1.397738)
+visible = false
+use_collision = true
+size = Vector3(7.54245, 3, 0.25)
+
+[node name="wall_int_2" type="CSGBox3D" parent="Room_06/apt_room_layout" unique_id=1117803719]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.30775768, 1.5, -0.86744875)
+use_collision = true
+size = Vector3(3, 3, 0.25)
+
+[connection signal="interacted" from="Room_01/bathroom_door/door/StaticBody3D" to="Room_01/bathroom_door" method="_on_interact"]
+[connection signal="body_entered" from="Room_01/apt_room_cam_area" to="Room_01/room_cam" method="make_camera_active" unbinds=1]
+[connection signal="body_entered" from="Room_01/apt_bathroom_cam_area" to="Room_01/bathroom_cam" method="make_camera_active" unbinds=1]

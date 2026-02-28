@@ -15,6 +15,10 @@ run/main_scene="uid://b2t5ucovmif1x"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CameraManager="*uid://bbw5tiulnokai"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2
@@ -60,6 +64,7 @@ interact={
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Interact"
+3d_physics/layer_4="Camera"
 
 [physics]
 
