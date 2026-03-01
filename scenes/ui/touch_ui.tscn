@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbjpxo4peiywv"]
 
-[ext_resource type="Script" uid="uid://pvgyc1l0nexf" path="res://scenes/ui/touch_ui.gd" id="1_dta07"]
+[ext_resource type="Script" uid="uid://pvgyc1l0nexf" path="res://scripts/touch_ui.gd" id="1_dta07"]
 [ext_resource type="PackedScene" uid="uid://f2wslj6moalj" path="res://scenes/ui/joy_circle.tscn" id="2_1j606"]
 [ext_resource type="Texture2D" uid="uid://d1wq4lwo0kyfk" path="res://assets/kenney/ui/button_circle.png" id="3_dta07"]
 
