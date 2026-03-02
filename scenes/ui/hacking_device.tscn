@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bkqps775qb5de"]
+
+[ext_resource type="Script" uid="uid://m1wqnlrgxtjl" path="res://scripts/ui/block_area.gd" id="1_0ju20"]
+[ext_resource type="Texture2D" uid="uid://ddpqtxa4fpqfo" path="res://assets/kenney/ui/icons/power.png" id="1_r6h2k"]
+[ext_resource type="Theme" uid="uid://d3orb4wpt3nsx" path="res://scenes/ui/tablet_theme.tres" id="1_rt4og"]
+
+[node name="hacking_device" type="PanelContainer" unique_id=16429736]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_rt4og")
+theme_type_variation = &"tablet_ext"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=106067024]
+layout_mode = 2
+
+[node name="top_bezel" type="Control" parent="VBoxContainer" unique_id=33752657]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=187310866]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 2
+
+[node name="left_bezel" type="Control" parent="VBoxContainer/GridContainer" unique_id=1958018736]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="block_working_area" type="VBoxContainer" parent="VBoxContainer/GridContainer" unique_id=43060740]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="work_background" type="ColorRect" parent="VBoxContainer/GridContainer/block_working_area" unique_id=1665914744]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.15, 0.15, 0.15, 1)
+script = ExtResource("1_0ju20")
+
+[node name="block_parent" type="Node2D" parent="VBoxContainer/GridContainer/block_working_area" unique_id=1716447580]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/GridContainer" unique_id=165296655]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="block_selection_area" type="ScrollContainer" parent="VBoxContainer/GridContainer/VBoxContainer2" unique_id=936234700]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/GridContainer/VBoxContainer2/block_selection_area" unique_id=1596282284]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.4364201, 0.3088676, 0.3232294, 1)
+
+[node name="right_bezel" type="Control" parent="VBoxContainer/GridContainer" unique_id=435624606]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bottom_bezel" type="Control" parent="VBoxContainer" unique_id=1391230602]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/bottom_bezel" unique_id=154678029]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="power-button" type="TextureRect" parent="VBoxContainer/bottom_bezel/HBoxContainer" unique_id=1877260946]
+modulate = Color(0.16206557, 0.1620656, 0.16206557, 1)
+layout_mode = 2
+texture = ExtResource("1_r6h2k")
+stretch_mode = 2

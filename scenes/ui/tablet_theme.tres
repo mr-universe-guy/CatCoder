@@ -1,0 +1,15 @@
+[gd_resource type="Theme" format=3 uid="uid://d3orb4wpt3nsx"]
+
+[ext_resource type="Texture2D" uid="uid://df2y2xhr6cjyo" path="res://assets/kenney/ui/UIPack/button_square_depth_gradient.png" id="1_icjia"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x1lmt"]
+texture = ExtResource("1_icjia")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 10.0
+modulate_color = Color(0.75686276, 0.39215687, 0.43529412, 1)
+
+[resource]
+tablet_ext/base_type = &"PanelContainer"
+tablet_ext/styles/panel = SubResource("StyleBoxTexture_x1lmt")
