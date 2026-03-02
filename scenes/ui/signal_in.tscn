@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cgsrcnvjeyw50"]
+
+[ext_resource type="Texture2D" uid="uid://8moyj46v1xn3" path="res://assets/kenney/ui/UIPack/icon_outline_circle.png" id="1_2oekm"]
+[ext_resource type="Script" uid="uid://ct8c3od3s5j1w" path="res://scripts/ui/prog_signal.gd" id="1_4jnq4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8qr3v"]
+font_size = 12
+font_color = Color(0.6789437, 0.6789437, 0.6789437, 1)
+
+[node name="signal_in" type="HBoxContainer" unique_id=935974068]
+script = ExtResource("1_4jnq4")
+
+[node name="socket" type="TextureRect" parent="." unique_id=118626387]
+layout_mode = 2
+texture = ExtResource("1_2oekm")
+stretch_mode = 3
+
+[node name="name" type="Label" parent="." unique_id=1975058548]
+layout_mode = 2
+text = "signal_in"
+label_settings = SubResource("LabelSettings_8qr3v")
