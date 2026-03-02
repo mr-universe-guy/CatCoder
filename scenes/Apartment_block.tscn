@@ -157,11 +157,9 @@ shape = SubResource("BoxShape3D_j0btv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0737686, 1.1848145, -0.44114113)
 shape = SubResource("BoxShape3D_xxdgh")
 
-[node name="room_cam" type="Camera3D" parent="Room_01" unique_id=1205814323 node_paths=PackedStringArray("show_on_activate", "hide_on_activate")]
+[node name="room_cam" type="Camera3D" parent="Room_01" unique_id=1205814323]
 transform = Transform3D(0.58633, -0.5138061, 0.62627506, -7.450581e-09, 0.77311003, 0.634272, -0.8100723, -0.37189266, 0.45329764, 4.789461, 4.030756, 4.868786)
 script = ExtResource("13_7lpee")
-show_on_activate = [NodePath("../blocker_bathroom"), NodePath("../../Hallway/blocker_hallway")]
-hide_on_activate = [NodePath("../../Room_06/apt_room_layout/wall_int_6"), NodePath("../../Room_06/apt_room_layout/wall_int_7")]
 
 [node name="apt_bathroom_cam_area" type="Area3D" parent="Room_01" unique_id=1676181403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7782013, 0, -1.0517384)

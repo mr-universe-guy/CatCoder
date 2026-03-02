@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://e8o7w4r8v7ln"
-path.s3tc="res://.godot/imported/colormap.png-d0ac39a6b8dbb81d7425cf4ee0027bcb.s3tc.ctex"
+path.etc2="res://.godot/imported/colormap.png-d0ac39a6b8dbb81d7425cf4ee0027bcb.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/kenney/space_station/Textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-d0ac39a6b8dbb81d7425cf4ee0027bcb.s3tc.ctex"]
+dest_files=["res://.godot/imported/colormap.png-d0ac39a6b8dbb81d7425cf4ee0027bcb.etc2.ctex"]
 
 [params]
 

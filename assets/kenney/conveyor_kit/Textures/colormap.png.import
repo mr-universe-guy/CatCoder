@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://biws4kwtt3ko3"
-path.s3tc="res://.godot/imported/colormap.png-a7e9fce0e7532bb512e783ab2f5592e0.s3tc.ctex"
+path.etc2="res://.godot/imported/colormap.png-a7e9fce0e7532bb512e783ab2f5592e0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/kenney/conveyor_kit/Textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-a7e9fce0e7532bb512e783ab2f5592e0.s3tc.ctex"]
+dest_files=["res://.godot/imported/colormap.png-a7e9fce0e7532bb512e783ab2f5592e0.etc2.ctex"]
 
 [params]
 

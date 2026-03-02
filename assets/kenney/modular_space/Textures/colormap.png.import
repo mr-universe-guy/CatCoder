@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bny2fu8unl3ix"
-path.s3tc="res://.godot/imported/colormap.png-0d33b99adff4e37bda6e0db0c57162b7.s3tc.ctex"
+path.etc2="res://.godot/imported/colormap.png-0d33b99adff4e37bda6e0db0c57162b7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/kenney/modular_space/Textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-0d33b99adff4e37bda6e0db0c57162b7.s3tc.ctex"]
+dest_files=["res://.godot/imported/colormap.png-0d33b99adff4e37bda6e0db0c57162b7.etc2.ctex"]
 
 [params]
 
