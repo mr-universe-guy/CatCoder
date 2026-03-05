@@ -7,6 +7,8 @@ extends Node3D
 	set = _on_toggle
 
 @export var toggle_transform := Transform3D()
+@export var duration := 1.0
+@export var transition := Tween.TransitionType.TRANS_LINEAR
 var tween : Tween
 
 ## The current transform becomes the toggle transform and the toggle transform becomes the current transform
@@ -22,7 +24,7 @@ func _on_toggle(value : bool) -> void:
 		toggle_transform = current
 	else:
 		tween = self.create_tween()
-		tween.tween_property(self, "transform", toggle_transform, 1.0).from_current()
+		tween.tween_property(self, "transform", toggle_transform, duration).from_current().set_trans(transition)
 		tween.tween_callback(_finalize_transform.bind(current))
 		tween.play()
 

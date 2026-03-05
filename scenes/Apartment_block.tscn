@@ -92,6 +92,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8547724, 0, 0.5487056)
 script = ExtResource("6_7lhm0")
 toggle_transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.8547724, 0, 0.5487056)
+transition = 6
 
 [node name="door" parent="Room_01/bathroom_door" unique_id=1798753042 instance=ExtResource("6_2mva0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6007675, 0, 0)
