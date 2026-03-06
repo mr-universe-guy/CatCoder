@@ -6,7 +6,10 @@ extends Node3D
 @export var toggle := false:
 	set = _on_toggle
 
-@export var toggle_transform := Transform3D()
+@export var off_transform := Transform3D()
+@export var on_transform := Transform3D()
+@warning_ignore("unused_private_class_variable")
+@export_tool_button("Record current transform") var _rec_action := _record
 @export var duration := 1.0
 @export var transition := Tween.TransitionType.TRANS_LINEAR
 var tween : Tween
@@ -17,20 +20,24 @@ func _on_toggle(value : bool) -> void:
 		return
 	
 	toggle = value
-	var current := Transform3D(transform)
 	
-	if Engine.is_editor_hint():
-		transform = toggle_transform
-		toggle_transform = current
+	var tgt_trans: Transform3D
+	if toggle:
+		tgt_trans = on_transform
 	else:
-		tween = self.create_tween()
-		tween.tween_property(self, "transform", toggle_transform, duration).from_current().set_trans(transition)
-		tween.tween_callback(_finalize_transform.bind(current))
-		tween.play()
+		tgt_trans = off_transform
+	
+	tween = self.create_tween()
+	tween.tween_property(self, "transform", tgt_trans, duration).from_current().set_trans(transition)
+	
 
 
-func _finalize_transform(trans: Transform3D) -> void:
-	toggle_transform = trans
+func _record() -> void:
+	if toggle:
+		on_transform = Transform3D(transform)
+	else:
+		off_transform = Transform3D(transform)
+
 
 func _on_interact(_player: Player) -> void:
 	toggle = !toggle
