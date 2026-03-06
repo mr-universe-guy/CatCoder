@@ -2,14 +2,14 @@
 class_name ProgBlock
 extends PanelContainer
 
-const prog_in_signal_scene = preload("res://scenes/ui/signal_in.tscn")
-const prog_out_signal_scene = preload("res://scenes/ui/signal_out.tscn")
+const prog_socket_scene = preload("res://scenes/ui/socket.tscn")
 
 @export var block_data : ProgBlockData:
 	set = _set_block_data
 
-@onready var incoming_signals_container := $prog_block/incoming_signals
-@onready var outgoing_signals_container := $prog_block/outgoing_signals
+@onready var incoming_signals_container := $prog_block/incoming_sockets
+@onready var outgoing_signals_container := $prog_block/outgoing_sockets
+
 
 func _ready() -> void:
 	_apply_data()
@@ -39,15 +39,14 @@ func _apply_data() -> void:
 	if block_data == null:
 		return;
 	
-	for sig_data in block_data.incoming_signals:
-		var scn : ProgSignal = prog_in_signal_scene.instantiate()
-		scn.set_data(sig_data)
-		incoming_signals_container.add_child(scn)
-	
-	for sig_data in block_data.outgoing_signals:
-		var scn : ProgSignal = prog_out_signal_scene.instantiate()
-		scn.set_data(sig_data)
-		outgoing_signals_container.add_child(scn)
+	for skt_data in block_data.sockets:
+		var skt : ProgSocket = prog_socket_scene.instantiate()
+		skt.socket_data = skt_data
+		match skt.socket_data.direction:
+			ProgSocketData.ProgSignalDirection.IN:
+				incoming_signals_container.add_child(skt)
+			ProgSocketData.ProgSignalDirection.OUT:
+				outgoing_signals_container.add_child(skt)
 	
 	var name_label : Label = $prog_block/name
 	name_label.text = block_data.block_name
