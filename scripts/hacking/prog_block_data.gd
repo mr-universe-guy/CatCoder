@@ -2,11 +2,19 @@
 class_name ProgBlockData
 extends Resource
 
-@export var block_name : String:
+## The display name of this prog block
+@export var block_name: String:
 	set = _set_block_name
+	
+## The logic id of the ProgBlockLogic this block references.
+@export var logic_id: String:
+	set = _set_logic_id
 
-@export var sockets: Array[ProgSocketData] = []:
-	set = _set_sockets
+## Locks the player from moving or editing this block
+@export var locked:= false
+
+## The position of the data block in reference to the data scene
+@export var position:= Vector2(0,0)
 
 
 func _set_block_name(value: String) -> void:
@@ -14,8 +22,6 @@ func _set_block_name(value: String) -> void:
 	emit_changed()
 
 
-func _set_sockets(value: Array[ProgSocketData]) -> void:
-	sockets = value
-	for s in sockets:
-		s.block = self
+func _set_logic_id(value: String) -> void:
+	logic_id = value
 	emit_changed()
