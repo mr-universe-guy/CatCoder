@@ -1,0 +1,374 @@
+You're correct that switching to a compiled-instruction approach changes the role of `block_logic`. The key shift is:
+
+**Block logic stops executing behavior and instead emits instructions during compilation.**
+
+At runtime, only the **VM executes instructions**, not the blocks.
+
+Below is the simplest way to implement this in Godot without building a full compiler framework.
+
+---
+
+# 1. The three phases your system will have
+
+Your program flow becomes:
+
+```
+Player edits graph
+        ↓
+compile_graph()
+        ↓
+CompiledProgram (instructions[])
+        ↓
+DeviceRuntime runs instructions
+```
+
+So blocks participate **only during compilation**, not execution.
+
+---
+
+# 2. What an instruction looks like in GDScript
+
+You don't need bytecode. A simple struct/dictionary works.
+
+Example instruction:
+
+```gdscript
+class_name ProgInstruction
+extends Resource
+
+var opcode : int
+var args : Array = []
+```
+
+Example instruction list:
+
+```gdscript
+[
+ {opcode = SET_LIGHT, args = [1]},
+ {opcode = END}
+]
+```
+
+You could also store them as arrays for speed:
+
+```
+[opcode, arg0, arg1]
+```
+
+But clarity first.
+
+---
+
+# 3. Define your instruction set
+
+Keep it very small.
+
+Example:
+
+```gdscript
+enum Opcode {
+	END,
+	SET_DEVICE_PORT,
+	ADD,
+	MOVE_NORTH,
+	MOVE_WEST,
+	JUMP,
+	JUMP_IF_ZERO,
+	SET_VAR,
+	DEC_VAR
+}
+```
+
+Your entire puzzle system can run on ~10-15 instructions.
+
+---
+
+# 4. What compilation looks like
+
+Compilation walks the graph **once** and asks blocks to emit instructions.
+
+Each block logic implements something like:
+
+```gdscript
+func compile(compiler, block)
+```
+
+The compiler provides helper methods.
+
+Example compiler:
+
+```gdscript
+class_name GraphCompiler
+
+var instructions = []
+
+func emit(opcode, args=[]):
+	instructions.append({
+		"opcode": opcode,
+		"args": args
+	})
+```
+
+---
+
+# 5. Example: Light output block
+
+Old behavior:
+
+```
+block_logic.resolve() → turn light on
+```
+
+New behavior:
+
+```
+block_logic.compile() → emit instruction
+```
+
+Example:
+
+```gdscript
+func compile(compiler, block):
+
+	compiler.emit(
+		Opcode.SET_DEVICE_PORT,
+		[block.args["port"], 1]
+	)
+```
+
+That's it.
+
+---
+
+# 6. Example: Loop block
+
+Loop blocks emit **jump instructions**.
+
+Pseudo compilation:
+
+```
+counter = iterations
+label_start:
+body
+counter--
+if counter > 0 jump label_start
+```
+
+Example code:
+
+```gdscript
+func compile(compiler, block):
+
+    var counter = compiler.alloc_var()
+
+    compiler.emit(Opcode.SET_VAR, [counter, block.args["iterations"]])
+
+    var loop_start = compiler.current_index()
+
+    compiler.compile_branch(block.body_socket)
+
+    compiler.emit(Opcode.DEC_VAR, [counter])
+
+    compiler.emit(Opcode.JUMP_IF_POSITIVE, [counter, loop_start])
+```
+
+Your compiler tracks jump targets.
+
+---
+
+# 7. Example: Branch / IF block
+
+Graph:
+
+```
+IF
+ / \
+A   B
+```
+
+Compile to:
+
+```
+if condition == 0 jump ELSE
+branch A
+jump END
+ELSE:
+branch B
+END:
+```
+
+Compiler example:
+
+```gdscript
+func compile(compiler, block):
+
+    compiler.compile_value(block.condition_socket)
+
+    var jump_else = compiler.emit_placeholder()
+
+    compiler.compile_branch(block.true_socket)
+
+    var jump_end = compiler.emit_placeholder()
+
+    compiler.patch_jump(jump_else, compiler.current_index())
+
+    compiler.compile_branch(block.false_socket)
+
+    compiler.patch_jump(jump_end, compiler.current_index())
+```
+
+---
+
+# 8. Runtime VM
+
+Runtime becomes extremely simple.
+
+Example device runtime:
+
+```gdscript
+class_name DeviceRuntime
+
+var program
+var pc = 0
+var vars = {}
+
+func step():
+
+    var instr = program.instructions[pc]
+
+    match instr.opcode:
+
+        Opcode.SET_DEVICE_PORT:
+            device.write(instr.args[0], instr.args[1])
+
+        Opcode.JUMP:
+            pc = instr.args[0]
+            return
+
+        Opcode.END:
+            return
+
+    pc += 1
+```
+
+Your VM literally just walks the instruction list.
+
+---
+
+# 9. Event entry points
+
+When compiling, store where events start.
+
+Example:
+
+```
+EVENT_SWITCH → instruction 0
+EVENT_TIMER  → instruction 12
+```
+
+Structure:
+
+```gdscript
+class_name CompiledProgram
+
+var instructions = []
+var event_entry = {}
+```
+
+When a switch flips:
+
+```gdscript
+runtime.pc = program.event_entry["switch"]
+runtime.run()
+```
+
+---
+
+# 10. Movement / async actions
+
+Some instructions pause execution.
+
+Example:
+
+```
+MOVE_NORTH
+```
+
+Runtime:
+
+```gdscript
+Opcode.MOVE_NORTH:
+    device.move_north()
+    paused = true
+```
+
+When movement finishes:
+
+```
+runtime.resume()
+```
+
+Execution continues from the same `pc`.
+
+---
+
+# 11. Where block_logic now lives
+
+`ProgBlockLogic` becomes **compile helpers**.
+
+Example:
+
+```
+get_sockets()
+get_argument_schema()
+compile()
+```
+
+They no longer execute gameplay.
+
+---
+
+# 12. Why this approach is actually simpler
+
+Without compilation your runtime must constantly solve:
+
+```
+graph traversal
+value propagation
+execution state
+loops
+branch tracking
+```
+
+With compilation:
+
+```
+runtime = simple interpreter
+```
+
+Much easier to debug.
+
+---
+
+# 13. Good news for your current system
+
+You **do not need to rewrite everything**.
+
+You can gradually transition:
+
+1. Keep graph editing as is
+2. Add a `compile()` method to block logic
+3. Build instruction list
+4. Write tiny runtime interpreter
+
+Blocks stop executing directly once compilation works.
+
+---
+
+# One last thing that will help your Godot implementation a lot
+
+Your graph compiler should produce **linear execution chains**, not recursive ones. That means during compilation you should build an **ordered execution path first**, then emit instructions.
+
+This avoids many edge cases with loops and branches.
+
+If you'd like, I can also show a **minimal VM implementation (~120 lines of GDScript)** that supports loops, branches, events, and device IO so you can see exactly how small the runtime actually becomes.

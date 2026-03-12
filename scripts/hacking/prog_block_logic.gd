@@ -15,3 +15,6 @@ func get_output_sockets() -> Array[ProgSocketData]:
 ## Return = an array of data to be written to the output sockets by declaration order.
 func resolve(inputs: Array[int]) -> Array[int]:
 	return []
+
+func validate() -> bool:
+	return false

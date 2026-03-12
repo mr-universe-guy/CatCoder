@@ -1,6 +1,13 @@
 @tool
 class_name ProgBlockData
 extends Resource
+## ProgBlockData stores the name, logic_id and position of a program block in the scene.
+
+enum BlockCategory{
+	EVENT,
+	VALUE,
+	ACTION
+}
 
 ## The display name of this prog block
 @export var block_name: String:
@@ -10,12 +17,15 @@ extends Resource
 @export var logic_id: String:
 	set = _set_logic_id
 
+@export var block_category: BlockCategory
+
 ## Locks the player from moving or editing this block
 @export var locked:= false
 
 ## The position of the data block in reference to the data scene
 @export var position:= Vector2(0,0)
 
+@export var args: Dictionary[String, Variant] = {}
 
 func _set_block_name(value: String) -> void:
 	block_name = value

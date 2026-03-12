@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://ddpqtxa4fpqfo" path="res://assets/kenney/ui/icons/power.png" id="1_r6h2k"]
 [ext_resource type="Theme" uid="uid://d3orb4wpt3nsx" path="res://scenes/ui/tablet_theme.tres" id="1_rt4og"]
 [ext_resource type="Script" uid="uid://w5mb4sfuj5ow" path="res://scripts/ui/hacking_device.gd" id="2_fcqaf"]
-[ext_resource type="PackedScene" uid="uid://c8cny4wdttoip" path="res://scenes/facility/apartments/Apt_01_Room_Controller.tscn" id="4_8qr3v"]
 
 [node name="hacking_device" type="PanelContainer" unique_id=16429736]
 anchors_preset = 15
@@ -48,9 +47,9 @@ size_flags_vertical = 3
 color = Color(0.15, 0.15, 0.15, 1)
 script = ExtResource("1_0ju20")
 
-[node name="block_parent" type="Node2D" parent="VBoxContainer/GridContainer/block_working_area" unique_id=1716447580]
+[node name="blocks" type="Node2D" parent="VBoxContainer/GridContainer/block_working_area/work_background" unique_id=1716447580]
 
-[node name="Apt_01_Room_Controller" parent="VBoxContainer/GridContainer/block_working_area/block_parent" unique_id=1853842108 instance=ExtResource("4_8qr3v")]
+[node name="noodles" type="Node2D" parent="VBoxContainer/GridContainer/block_working_area/work_background" unique_id=2131297820]
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/GridContainer" unique_id=165296655]
 custom_minimum_size = Vector2(200, 0)

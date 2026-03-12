@@ -1,9 +1,11 @@
 @tool
 class_name ProgSocketData
 extends Resource
+## ProgSocketData stores the data type, data direction and parent block.
+## Prog Sockets exist for noodles to attach to.
 
 enum ProgSignalDataType{ BOOL, NUMBER }
-enum ProgSignalDirection{ IN, OUT}
+enum ProgSignalDirection{ IN, OUT }
 
 ## The name of this socket, it should be unique within the block
 @export var signal_id : String:

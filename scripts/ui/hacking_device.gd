@@ -1,7 +1,7 @@
 extends PanelContainer
 
-
-func set_hacking_scene(_scene: Node2D) -> void:
+## load the program data and create the scene to interact with
+func set_program(program: ProgData) -> void:
 	pass
 
 

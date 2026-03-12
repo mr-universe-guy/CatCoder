@@ -27,6 +27,14 @@ func _set_block_data(d : ProgBlockData) -> void:
 	_apply_data()
 
 
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_TRANSFORM_CHANGED:
+			if block_data.locked:
+				return
+			block_data.position = position
+
+
 func _apply_data() -> void:
 	if not is_node_ready():
 		return
@@ -37,16 +45,24 @@ func _apply_data() -> void:
 		c.queue_free()
 	
 	if block_data == null:
-		return;
+		return
 	
-	for skt_data in block_data.sockets:
+	var logic_id := block_data.logic_id
+	var logic_data := ProgBlockRegistry.get_logic(logic_id)
+	
+	if logic_data == null:
+		return
+	
+	for skt_data in logic_data.get_input_sockets():
 		var skt : ProgSocket = prog_socket_scene.instantiate()
 		skt.socket_data = skt_data
-		match skt.socket_data.direction:
-			ProgSocketData.ProgSignalDirection.IN:
-				incoming_signals_container.add_child(skt)
-			ProgSocketData.ProgSignalDirection.OUT:
-				outgoing_signals_container.add_child(skt)
+		incoming_signals_container.add_child(skt)
+	
+	for skt_data in logic_data.get_output_sockets():
+		var skt : ProgSocket = prog_socket_scene.instantiate()
+		skt.socket_data = skt_data
+		outgoing_signals_container.add_child(skt)
 	
 	var name_label : Label = $prog_block/name
 	name_label.text = block_data.block_name
+	position = block_data.position
