@@ -27,6 +27,7 @@ enum BlockCategory{
 
 @export var args: Dictionary[String, Variant] = {}
 
+
 func _set_block_name(value: String) -> void:
 	block_name = value
 	emit_changed()

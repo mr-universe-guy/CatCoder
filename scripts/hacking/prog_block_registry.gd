@@ -1,15 +1,18 @@
+@tool
 extends Node
 
-var _registry : Dictionary[String, ProgBlockLogic] = {
-	
+var registry : Dictionary[String, ProgBlockLogic] = {
+	ProgDebugLogic.get_id(): ProgDebugLogic.new(),
+	ProgSignalEventLogic.get_id(): ProgSignalEventLogic.new()
 }
 
 
-func  register(id: String, logic_class: ProgBlockLogic) -> void:
-	_registry[id] = logic_class
+func  register(logic_class: ProgBlockLogic) -> void:
+	registry[logic_class.get_id()] = logic_class
+
 
 func get_logic(id: String) -> ProgBlockLogic:
-	if not _registry.has(id):
+	if not registry.has(id):
 		push_error("Unknown block logic: " + id)
 		return null
-	return _registry[id]
+	return registry[id]

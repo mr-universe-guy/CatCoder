@@ -17,7 +17,7 @@ const TEX_NUMBER := preload("res://assets/kenney/ui/UIPack/icon_outline_square.p
 @export var socket_data : ProgSocketData:
 	set = _set_data
 
-@onready var noodler: Noodler = $Noodler
+#@onready var noodler: Noodler = $Noodler
 
 func _ready() -> void:
 	_apply_data()
@@ -58,9 +58,9 @@ func _apply_data() -> void:
 
 ## This should signal the beginning of a drag
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	var noodle := Noodler.new()
-	noodle.origin = $socket
-	set_drag_preview(noodle)
+	#var noodle := Noodler.new()
+	#noodle.origin = $socket
+	#set_drag_preview(noodle)
 	return socket_data
 
 

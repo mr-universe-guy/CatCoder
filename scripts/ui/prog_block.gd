@@ -50,6 +50,8 @@ func _apply_data() -> void:
 	var logic_id := block_data.logic_id
 	var logic_data := ProgBlockRegistry.get_logic(logic_id)
 	
+	
+	assert(logic_data, "Logic data missing for logid_id: %s" % block_data.logic_id)
 	if logic_data == null:
 		return
 	

@@ -1,8 +1,11 @@
 class_name ProgBlockLogic
 extends RefCounted
+## The logical implementation of the progblock. 
+## Generates machine code to be run by the vm.
 
-func get_display_name() -> String:
-	return "Error"
+## The display name of this logic block
+static func get_id() -> String:
+	return "null_id"
 
 func get_input_sockets() -> Array[ProgSocketData]:
 	return []

@@ -1,7 +1,7 @@
 class_name ProgDebugLogic
 extends ProgBlockLogic
 
-func get_display_name() -> String:
+static func get_id() -> String:
 	return "Debug"
 
 func resolve(inputs: Array[int]) -> Array[int]:

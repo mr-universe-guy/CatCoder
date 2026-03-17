@@ -22,6 +22,15 @@ enum ProgSignalDirection{ IN, OUT }
 ## The parent block for this data
 @export var block: ProgBlockData
 
+
+static func create(_id: String, _type: ProgSignalDataType, _direction: ProgSignalDirection) -> ProgSocketData:
+	var socket := ProgSocketData.new()
+	socket.signal_id = _id
+	socket.signal_type = _type
+	socket.direction = _direction
+	return socket
+
+
 func _set_id(value: String) -> void:
 	signal_id = value
 	emit_changed()
