@@ -1,7 +1,7 @@
 extends LineEdit
 
 ## regex pattern of allowable characters
-@export var allowed_characters := "^[A-Za-z0-9]*"
+@export var allowed_characters := "^[A-Za-z0-9_]*"
 
 @onready var regex := RegEx.create_from_string(allowed_characters)
 

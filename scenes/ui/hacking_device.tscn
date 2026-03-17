@@ -73,10 +73,9 @@ layout_mode = 2
 theme_override_constants/tab_separation = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_fcqaf")
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Blocks" type="ScrollContainer" parent="VBoxContainer/GridContainer/PanelContainer" unique_id=936234700]
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -88,6 +87,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="Variables" type="ScrollContainer" parent="VBoxContainer/GridContainer/PanelContainer" unique_id=1525076751]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 vertical_scroll_mode = 2
