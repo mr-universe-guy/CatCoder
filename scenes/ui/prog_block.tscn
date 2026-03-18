@@ -1,13 +1,24 @@
 [gd_scene format=3 uid="uid://dqu86fp58xbq5"]
 
 [ext_resource type="Script" uid="uid://es2g083mxhnr" path="res://scripts/ui/prog_block.gd" id="1_vwqxk"]
-[ext_resource type="Script" uid="uid://cd2nqqkiswfto" path="res://scripts/hacking/prog_socket_data.gd" id="3_p7iwg"]
 [ext_resource type="Script" uid="uid://btt10ajdf0foc" path="res://scripts/hacking/prog_block_data.gd" id="3_r0vee"]
 
 [sub_resource type="Resource" id="Resource_p7iwg"]
 script = ExtResource("3_r0vee")
-block_name = "test"
 metadata/_custom_type_script = "uid://btt10ajdf0foc"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7iwg"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.69733906, 0.82522553, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="LabelSettings" id="LabelSettings_fcqaf"]
 font_size = 22
@@ -17,8 +28,17 @@ outline_color = Color(0.38170326, 0.38170323, 0.38170323, 1)
 [node name="ProgBlock" type="PanelContainer" unique_id=2086474190]
 offset_right = 40.0
 offset_bottom = 40.0
+focus_mode = 2
+focus_behavior_recursive = 2
+mouse_default_cursor_shape = 13
 script = ExtResource("1_vwqxk")
 block_data = SubResource("Resource_p7iwg")
+
+[node name="focus" type="Panel" parent="." unique_id=1700916561]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p7iwg")
 
 [node name="prog_block" type="HBoxContainer" parent="." unique_id=2069434412]
 layout_mode = 2

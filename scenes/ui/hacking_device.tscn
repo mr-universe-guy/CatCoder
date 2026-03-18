@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://bkqps775qb5de"]
 
-[ext_resource type="Script" uid="uid://m1wqnlrgxtjl" path="res://scripts/ui/prog_visualizer.gd" id="1_0ju20"]
 [ext_resource type="Texture2D" uid="uid://ddpqtxa4fpqfo" path="res://assets/kenney/ui/icons/power.png" id="1_r6h2k"]
 [ext_resource type="Theme" uid="uid://d3orb4wpt3nsx" path="res://scenes/ui/tablet_theme.tres" id="1_rt4og"]
 [ext_resource type="Script" uid="uid://w5mb4sfuj5ow" path="res://scripts/ui/prog_editor.gd" id="2_fcqaf"]
 [ext_resource type="Script" uid="uid://b43o1m5jy4rtk" path="res://scripts/ui/filter_line_edit.gd" id="4_8qr3v"]
+[ext_resource type="Texture2D" uid="uid://d0numtfuedkh7" path="res://assets/kenney/ui/icons/trashcan.png" id="4_hvtbs"]
+[ext_resource type="Texture2D" uid="uid://c3eb6ygkwelxy" path="res://assets/kenney/ui/icons/trashcanOpen.png" id="4_ve2gp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qr3v"]
 bg_color = Color(0.16, 0.1376, 0.14768, 1)
@@ -61,11 +62,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_8qr3v")
-script = ExtResource("1_0ju20")
 
 [node name="blocks" type="Node2D" parent="VBoxContainer/GridContainer/block_working_area/block_area" unique_id=1716447580]
 
 [node name="noodles" type="Node2D" parent="VBoxContainer/GridContainer/block_working_area/block_area" unique_id=2131297820]
+
+[node name="TrashCan" type="TextureButton" parent="VBoxContainer/GridContainer/block_working_area/block_area" unique_id=1228430956]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 60.0
+grow_horizontal = 0
+focus_mode = 0
+texture_normal = ExtResource("4_hvtbs")
+texture_pressed = ExtResource("4_ve2gp")
+texture_hover = ExtResource("4_ve2gp")
+texture_disabled = ExtResource("4_hvtbs")
+texture_focused = ExtResource("4_ve2gp")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="ToolTabs" type="TabContainer" parent="VBoxContainer/GridContainer" unique_id=448424821]
 custom_minimum_size = Vector2(200, 0)
@@ -142,5 +159,6 @@ layout_mode = 2
 texture = ExtResource("1_r6h2k")
 stretch_mode = 2
 
+[connection signal="pressed" from="VBoxContainer/GridContainer/block_working_area/block_area/TrashCan" to="." method="_on_trash_can_pressed"]
 [connection signal="text_submitted" from="VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer/VariableNameField" to="." method="_on_variable_name_field_text_submitted"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer/RemoveVarButton" to="." method="_on_remove_var_button_pressed"]

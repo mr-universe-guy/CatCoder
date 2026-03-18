@@ -2,7 +2,6 @@ extends PanelContainer
 
 
 var _prog_block := preload("res://scenes/ui/prog_block.tscn")
-
 var cur_program: ProgData = ProgData.new() : 
 	set = _set_program
 
@@ -56,6 +55,19 @@ func create_block_from_id(id: String) -> void:
 func draw_all_blocks_from_data() -> void:
 	pass
 
+
+func remove_focused_block() -> void:
+	var focus := get_viewport().gui_get_focus_owner()
+	print(focus)
+	if not focus:
+		return
+	if focus is not ProgBlock:
+		return
+	var block := focus as ProgBlock
+	var data := block.block_data
+	cur_program.prog_blocks.erase(data)
+	block.queue_free()
+
 #endregion
 
 
@@ -97,3 +109,7 @@ func _on_remove_var_button_pressed() -> void:
 	display_variables()
 
 #endregion
+
+# TODO: drag and drop trash can and trash can that can delete previously focused block
+func _on_trash_can_pressed() -> void:
+	remove_focused_block()

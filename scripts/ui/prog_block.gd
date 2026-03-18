@@ -12,6 +12,7 @@ var is_grabbed := false
 
 @onready var incoming_signals_container := $prog_block/incoming_sockets
 @onready var outgoing_signals_container := $prog_block/outgoing_sockets
+@onready var focus_panel : Control = $focus
 
 
 static func create_from_data(data: ProgBlockData) -> ProgBlock:
@@ -43,6 +44,10 @@ func _notification(what: int) -> void:
 			if block_data.locked:
 				return
 			block_data.position = position
+		NOTIFICATION_FOCUS_ENTER:
+			focus_panel.show()
+		NOTIFICATION_FOCUS_EXIT:
+			focus_panel.hide()
 
 
 func _apply_data() -> void:
