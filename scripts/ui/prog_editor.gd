@@ -6,7 +6,7 @@ var cur_program: ProgData = ProgData.new() :
 	set = _set_program
 
 @onready var _block_list : VBoxContainer = $VBoxContainer/GridContainer/ToolTabs/Blocks/VBox
-@onready var _block_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/blocks
+@onready var _block_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset/blocks
 @onready var _var_list : ItemList = $VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer/VariableList
 
 
@@ -23,6 +23,12 @@ func _ready() -> void:
 	display_block_tools()
 	display_variables()
 
+#region noodles
+
+func add_noodle(start: ProgSocket, end: ProgSocket) -> void:
+	pass
+
+#endregion
 
 #region Blocks
 
