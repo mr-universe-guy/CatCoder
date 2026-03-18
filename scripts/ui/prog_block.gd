@@ -3,12 +3,22 @@ class_name ProgBlock
 extends PanelContainer
 
 const prog_socket_scene = preload("res://scenes/ui/socket.tscn")
+const prog_block_scene = preload("res://scenes/ui/prog_block.tscn")
 
 @export var block_data : ProgBlockData:
 	set = _set_block_data
 
+var is_grabbed := false
+
 @onready var incoming_signals_container := $prog_block/incoming_sockets
 @onready var outgoing_signals_container := $prog_block/outgoing_sockets
+
+
+static func create_from_data(data: ProgBlockData) -> ProgBlock:
+	assert(data, "Data cannot be null.")
+	var block : ProgBlock = prog_block_scene.instantiate()
+	block.block_data = data
+	return block
 
 
 func _ready() -> void:
@@ -66,5 +76,14 @@ func _apply_data() -> void:
 		outgoing_signals_container.add_child(skt)
 	
 	var name_label : Label = $prog_block/name
-	name_label.text = block_data.block_name
+	name_label.text = logic_id
 	position = block_data.position
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		var e := event as InputEventMouseButton
+		is_grabbed = e.button_index == MouseButton.MOUSE_BUTTON_LEFT and e.is_pressed()
+	if is_grabbed and event is InputEventMouseMotion:
+		var e := event as InputEventMouseMotion
+		position += e.relative

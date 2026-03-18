@@ -67,7 +67,7 @@ script = ExtResource("1_0ju20")
 
 [node name="noodles" type="Node2D" parent="VBoxContainer/GridContainer/block_working_area/block_area" unique_id=2131297820]
 
-[node name="PanelContainer" type="TabContainer" parent="VBoxContainer/GridContainer" unique_id=448424821]
+[node name="ToolTabs" type="TabContainer" parent="VBoxContainer/GridContainer" unique_id=448424821]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/tab_separation = 4
@@ -75,34 +75,34 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fcqaf")
 tab_alignment = 1
 current_tab = 0
 
-[node name="Blocks" type="ScrollContainer" parent="VBoxContainer/GridContainer/PanelContainer" unique_id=936234700]
+[node name="Blocks" type="ScrollContainer" parent="VBoxContainer/GridContainer/ToolTabs" unique_id=936234700]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 3
 vertical_scroll_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer/Blocks" unique_id=165296655]
+[node name="VBox" type="VBoxContainer" parent="VBoxContainer/GridContainer/ToolTabs/Blocks" unique_id=165296655]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="Variables" type="ScrollContainer" parent="VBoxContainer/GridContainer/PanelContainer" unique_id=1525076751]
+[node name="Variables" type="ScrollContainer" parent="VBoxContainer/GridContainer/ToolTabs" unique_id=1525076751]
 visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 vertical_scroll_mode = 2
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer/Variables" unique_id=121038345]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/GridContainer/ToolTabs/Variables" unique_id=121038345]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VariableList" type="ItemList" parent="VBoxContainer/GridContainer/PanelContainer/Variables/VBoxContainer" unique_id=1854451417]
+[node name="VariableList" type="ItemList" parent="VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer" unique_id=1854451417]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VariableNameField" type="LineEdit" parent="VBoxContainer/GridContainer/PanelContainer/Variables/VBoxContainer" unique_id=1415900557]
+[node name="VariableNameField" type="LineEdit" parent="VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer" unique_id=1415900557]
 layout_mode = 2
 placeholder_text = "add_variable"
 max_length = 32
@@ -110,7 +110,7 @@ emoji_menu_enabled = false
 clear_button_enabled = true
 script = ExtResource("4_8qr3v")
 
-[node name="RemoveVarButton" type="Button" parent="VBoxContainer/GridContainer/PanelContainer/Variables/VBoxContainer" unique_id=1148326963]
+[node name="RemoveVarButton" type="Button" parent="VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer" unique_id=1148326963]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove"
@@ -142,7 +142,5 @@ layout_mode = 2
 texture = ExtResource("1_r6h2k")
 stretch_mode = 2
 
-[connection signal="empty_clicked" from="VBoxContainer/GridContainer/PanelContainer/Variables/VBoxContainer/VariableList" to="." method="_on_variable_list_empty_clicked"]
-[connection signal="item_selected" from="VBoxContainer/GridContainer/PanelContainer/Variables/VBoxContainer/VariableList" to="." method="_on_variable_list_item_selected"]
-[connection signal="text_submitted" from="VBoxContainer/GridContainer/PanelContainer/Variables/VBoxContainer/VariableNameField" to="." method="_on_variable_name_field_text_submitted"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/PanelContainer/Variables/VBoxContainer/RemoveVarButton" to="." method="_on_remove_var_button_pressed"]
+[connection signal="text_submitted" from="VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer/VariableNameField" to="." method="_on_variable_name_field_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer/RemoveVarButton" to="." method="_on_remove_var_button_pressed"]
