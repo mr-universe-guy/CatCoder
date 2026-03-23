@@ -54,7 +54,8 @@ func add_noodle(data: NoodleData, origin: ProgSocket, destination: ProgSocket) -
 func remove_noodle(noodle: Noodler) -> void:
 	if noodle.destination and noodle.destination is ProgSocket:
 		var dest := noodle.destination as ProgSocket
-		dest.incoming_noodle = null
+		if dest is ProgInputSocket:
+			(dest as ProgInputSocket).incoming_noodle = null
 	
 	noodle.queue_free()
 	cur_program.noodles.erase(noodle.data)
