@@ -13,5 +13,5 @@ func get_input_sockets() -> Array[ProgSocketData]:
 
 func get_output_sockets() -> Array[ProgSocketData]:
 	return [
-		ProgSocketData.create("received", ProgSocketData.ProgSignalDataType.BOOL, ProgSocketData.ProgSignalDirection.OUT)
+		ProgSocketData.create("received", ProgSocketData.DataType.BOOL, ProgSocketData.Direction.OUT)
 	]

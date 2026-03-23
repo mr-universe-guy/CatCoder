@@ -10,5 +10,5 @@ func resolve(inputs: Array[int]) -> Array[int]:
 
 func get_input_sockets() -> Array[ProgSocketData]:
 	return [
-		ProgSocketData.create("Data", ProgSocketData.ProgSignalDataType.NUMBER, ProgSocketData.ProgSignalDirection.IN)
+		ProgSocketData.create("Data", ProgSocketData.DataType.NUMBER, ProgSocketData.Direction.IN)
 	]

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 CameraManager="*uid://bbw5tiulnokai"
 ProgBlockRegistry="*uid://785312837iba"
+ProgManager="*uid://va5ff8g4a3kn"
 
 [debug]
 

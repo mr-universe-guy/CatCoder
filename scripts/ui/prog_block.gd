@@ -2,7 +2,8 @@
 class_name ProgBlock
 extends PanelContainer
 
-const prog_socket_scene = preload("res://scenes/ui/socket.tscn")
+const prog_in_socket_scene = preload("res://scenes/ui/in_socket.tscn")
+const prog_out_socket_scene = preload("res://scenes/ui/out_socket.tscn")
 const prog_block_scene = preload("res://scenes/ui/prog_block.tscn")
 
 @export var block_data : ProgBlockData:
@@ -71,12 +72,12 @@ func _apply_data() -> void:
 		return
 	
 	for skt_data in logic_data.get_input_sockets():
-		var skt : ProgSocket = prog_socket_scene.instantiate()
+		var skt : ProgSocket = prog_in_socket_scene.instantiate()
 		skt.socket_data = skt_data
 		incoming_signals_container.add_child(skt)
 	
 	for skt_data in logic_data.get_output_sockets():
-		var skt : ProgSocket = prog_socket_scene.instantiate()
+		var skt : ProgSocket = prog_out_socket_scene.instantiate()
 		skt.socket_data = skt_data
 		outgoing_signals_container.add_child(skt)
 	

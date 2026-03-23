@@ -2,13 +2,6 @@
 class_name ProgSocket
 extends HBoxContainer
 
-enum ProgSocketDataType{
-	BOOL, NUMBER
-}
-
-enum ProgSocketDirection{
-	IN,OUT
-}
 
 const TEX_BOOL := preload("res://assets/kenney/ui/UIPack/icon_outline_circle.png")
 const TEX_NUMBER := preload("res://assets/kenney/ui/UIPack/icon_outline_square.png")
@@ -17,7 +10,7 @@ const TEX_NUMBER := preload("res://assets/kenney/ui/UIPack/icon_outline_square.p
 @export var socket_data : ProgSocketData:
 	set = _set_data
 
-#@onready var noodler: Noodler = $Noodler
+@export var incoming_noodle : Noodler
 
 func _ready() -> void:
 	_apply_data()
@@ -42,43 +35,88 @@ func _apply_data() -> void:
 	
 	var socket : TextureRect = $socket
 	match socket_data.signal_type:
-		ProgSocketDataType.BOOL:
+		ProgSocketData.DataType.BOOL:
 			socket.texture = TEX_BOOL
-		ProgSocketDataType.NUMBER:
+		ProgSocketData.DataType.NUMBER:
 			socket.texture = TEX_NUMBER
-	
-	match socket_data.direction:
-		ProgSocketDirection.IN:
-			print("in")
-			move_child($socket, 0)
-		ProgSocketDirection.OUT:
-			print("out")
-			move_child($socket, -2)
 
 
 ## This should signal the beginning of a drag
+## TODO: use a dictionary to set the data needed for the editor, later we'll figure
+## out about converting to custom classes
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	#var noodle := Noodler.new()
-	#noodle.origin = $socket
-	#set_drag_preview(noodle)
-	return socket_data
+	var data_map := {}
+	var noodle_data := NoodleData.new()
+	data_map["noodle_data"] = noodle_data
+	
+	if socket_data.direction == ProgSocketData.Direction.IN:
+		if incoming_noodle:
+			print("Use existing noodle")
+			data_map["origin_socket"] = incoming_noodle.origin
+			noodle_data = incoming_noodle.data
+			noodle_data.to_socket = null
+			ProgManager.device.remove_noodle(incoming_noodle)
+		else:
+			noodle_data.to_socket = socket_data
+			data_map["destination_socket"] = self
+	else:
+		# outgoing sockets can have multiple outgoing noodles so this should be fine
+		noodle_data.from_socket = socket_data
+		data_map["origin_socket"] = self
+	
+	var drag_target := Control.new()
+	set_drag_preview(drag_target)
+	
+	ProgManager.device.begin_noodle_preview(self, drag_target)
+	
+	return data_map
 
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
-	if data is not ProgSocketData:
+	if not typeof(data) == TYPE_DICTIONARY:
 		return false
-	var other := data as ProgSocketData
-	return socket_data.is_noodle_possible(other)
+	
+	var data_map := data as Dictionary
+	if not data_map.has("noodle_data"):
+		return false
+	
+	var other : NoodleData = data_map["noodle_data"]
+	
+	if socket_data.direction == ProgSocketData.Direction.IN:
+		if other.to_socket:
+			return false
+	else:
+		if other.from_socket:
+			return false
+	
+	return true
 
 
-#func _drop_data(at_position: Vector2, data: Variant) -> void:
-	#assert(data is ProgSocketData, "Drop data does not contain ProgSocketData")
-	#
-	#var skt_b := data as ProgSocketData
-	#if socket_data.attach_noodle(skt_b):
-		#print("Noodle successful")
-	#else:
-		#print("Noodle failed")
+func _drop_data(at_position: Vector2, data: Variant) -> void:
+	assert(data is Dictionary and (data as Dictionary).has("noodle_data"), "Drop data does not contain Noodle Data")
+	
+	var data_map := data as Dictionary
+	var noodle : NoodleData = data_map["noodle_data"]
+	
+	var origin : ProgSocket
+	var destination: ProgSocket
+	
+	if socket_data.direction == ProgSocketData.Direction.IN:
+		##TODO: if this is an incoming socket and it already has a noodle, destroy that noodle
+		if incoming_noodle:
+			pass
+		
+		noodle.to_socket = socket_data
+		origin = data_map["origin_socket"]
+		destination = self
+		incoming_noodle = ProgManager.device.add_noodle(noodle, origin, destination)
+	else:
+		noodle.from_socket = socket_data
+		origin = self
+		destination = data_map["destination_socket"]
+		ProgManager.device.add_noodle(noodle, origin, destination)
+	
+	ProgManager.device.end_noodle_preview()
 
 
 func _notification(what: int) -> void:

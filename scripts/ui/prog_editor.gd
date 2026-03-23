@@ -1,3 +1,4 @@
+class_name ProgEditor
 extends PanelContainer
 
 
@@ -7,8 +8,9 @@ var cur_program: ProgData = ProgData.new() :
 
 @onready var _block_list : VBoxContainer = $VBoxContainer/GridContainer/ToolTabs/Blocks/VBox
 @onready var _block_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset/blocks
+@onready var _noodle_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset/noodles
 @onready var _var_list : ItemList = $VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer/VariableList
-
+@onready var _preview_noodle := Noodler.new()
 
 ## load the program data and create the scene to interact with
 func _set_program(program: ProgData) -> void:
@@ -20,13 +22,62 @@ func upload_hack() -> void:
 
 
 func _ready() -> void:
+	#register self with global progmanager
+	ProgManager.device = self
+	
+	_noodle_scene.add_child(_preview_noodle)
+	
 	display_block_tools()
 	display_variables()
 
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END and not get_viewport().gui_is_drag_successful():
+		end_noodle_preview()
+
 #region noodles
 
-func add_noodle(start: ProgSocket, end: ProgSocket) -> void:
-	pass
+func add_noodle(data: NoodleData, origin: ProgSocket, destination: ProgSocket) -> Noodler:
+	# append the noodle data and add a visual noodle
+	cur_program.noodles.append(data)
+	
+	print("Adding noodle")
+	var noodle := Noodler.new()
+	noodle.data = data
+	noodle.origin = origin
+	noodle.destination = destination
+	
+	_noodle_scene.add_child(noodle)
+	return noodle
+
+
+func remove_noodle(noodle: Noodler) -> void:
+	if noodle.destination and noodle.destination is ProgSocket:
+		var dest := noodle.destination as ProgSocket
+		dest.incoming_noodle = null
+	
+	noodle.queue_free()
+	cur_program.noodles.erase(noodle.data)
+
+
+func begin_noodle_preview(origin: ProgSocket, drag_target: Control) -> void:
+	if origin.socket_data.direction == ProgSocketData.Direction.IN:
+		_preview_noodle.destination = origin
+		_preview_noodle.origin = drag_target
+	else:
+		_preview_noodle.origin = origin
+		_preview_noodle.destination = drag_target
+		
+	_preview_noodle._update_points()
+	_preview_noodle.show()
+	
+	print("Noodle Preview Start")
+
+
+func end_noodle_preview() -> void:
+	_preview_noodle.hide()
+	
+	print("Noodle Preview End")
 
 #endregion
 

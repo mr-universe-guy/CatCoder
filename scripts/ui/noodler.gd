@@ -1,37 +1,44 @@
 class_name Noodler
-extends Control
+extends Line2D
 
-@export var noodle_texture : Texture2D = preload("res://assets/kenney/ui/UIPack/check_square_color.png")
-
-var origin: CanvasItem:
+@export var data : NoodleData
+@export var origin : Control:
 	set = _set_origin
-var noodle: Line2D = Line2D.new()
+@export var destination : Control:
+	set = _set_destination
 
 
-func _enter_tree() -> void:
-	if noodle_texture:
-		noodle.texture = noodle_texture
-		noodle.texture_mode = Line2D.LINE_TEXTURE_STRETCH
-	set_notify_transform(true)
-	var origin_pos := origin.get_global_transform_with_canvas().get_origin()
-	noodle.add_point(origin_pos)
-	noodle.add_point(Vector2.ZERO)
-	add_child(noodle)
+func _init() -> void:
+	add_point(Vector2(0,0))
+	add_point(Vector2(0,0))
 
 
-func _draw_noodle() -> void:
-	var origin_pos := origin.get_global_transform_with_canvas().get_origin()
-	var noodle_pos := get_global_transform_with_canvas().get_origin()
-	noodle.set_point_position(0, origin_pos-noodle_pos)
+func _ready() -> void:
+	_update_points()
 
 
-func _set_origin(o: CanvasItem) -> void:
-	if origin and origin.item_rect_changed.is_connected(_draw_noodle):
-		origin.item_rect_changed.disconnect(_draw_noodle)
-	origin = o
-	origin.item_rect_changed.connect(_draw_noodle)
+func _set_origin(value: Control) -> void:
+	if origin and origin.item_rect_changed.is_connected(_on_socket_change):
+		origin.item_rect_changed.disconnect(_on_socket_change)
+	origin = value
+	if not value or not is_node_ready():
+		return
+	origin.item_rect_changed.connect(_on_socket_change)
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSFORM_CHANGED:
-		_draw_noodle()
+func _set_destination(value: Control) -> void:
+	if destination and destination.item_rect_changed.is_connected(_on_socket_change):
+		destination.item_rect_changed.disconnect(_on_socket_change)
+	destination = value
+	if not value or not is_node_ready():
+		return
+	destination.item_rect_changed.connect(_on_socket_change)
+
+
+func _on_socket_change() -> void:
+	_update_points()
+
+
+func _update_points() -> void:
+	points[0] = origin.get_global_rect().get_center() if origin else Vector2.ZERO
+	points [1] = destination.get_global_rect().get_center() if destination else Vector2.ZERO
