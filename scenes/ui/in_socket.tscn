@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://cd2nqqkiswfto"
 font_size = 12
 font_color = Color(0.6789437, 0.6789437, 0.6789437, 1)
 
-[node name="signal_out" type="HBoxContainer" unique_id=1502462953]
+[node name="signal_in" type="HBoxContainer" unique_id=1502462953]
 mouse_filter = 0
 alignment = 2
 script = ExtResource("1_n8j6a")

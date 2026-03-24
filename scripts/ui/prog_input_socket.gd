@@ -9,7 +9,7 @@ func _get_drag_data(pos: Vector2) -> Variant:
 	var noodle_data := NoodleData.new()
 	data_map["noodle_data"] = noodle_data
 	
-	var drag_target := ProgSocket.new()
+	var drag_target : ProgSocket = PREVIEW_SOCKET.instantiate()
 	set_drag_preview(drag_target)
 	
 	if incoming_noodle and incoming_noodle.origin is ProgSocket:

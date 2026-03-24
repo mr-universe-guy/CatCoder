@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dljvqbi6csk40"]
+
+[ext_resource type="Script" uid="uid://ct8c3od3s5j1w" path="res://scripts/ui/prog_socket.gd" id="1_pi8xv"]
+
+[node name="signal_preview" type="HBoxContainer" unique_id=1502462953]
+mouse_filter = 0
+alignment = 2
+script = ExtResource("1_pi8xv")
+
+[node name="socket" type="Control" parent="." unique_id=112715954]
+layout_mode = 2

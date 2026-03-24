@@ -10,7 +10,7 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 	noodle_data.from_socket = socket_data
 	data_map["origin_socket"] = self
 	
-	var drag_target := ProgSocket.new()
+	var drag_target : Control = PREVIEW_SOCKET.instantiate()
 	set_drag_preview(drag_target)
 	
 	ProgManager.device.begin_noodle_preview(self, drag_target)

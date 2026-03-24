@@ -10,6 +10,7 @@ var cur_program: ProgData = ProgData.new() :
 @onready var _block_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset/blocks
 @onready var _noodle_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset/noodles
 @onready var _var_list : ItemList = $VBoxContainer/GridContainer/ToolTabs/Variables/VBoxContainer/VariableList
+@onready var offset_node : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset
 @onready var _preview_noodle := Noodler.new()
 
 ## load the program data and create the scene to interact with

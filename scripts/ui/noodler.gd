@@ -9,8 +9,14 @@ extends Line2D
 
 
 func _init() -> void:
+	begin_cap_mode = Line2D.LINE_CAP_ROUND
+	end_cap_mode = Line2D.LINE_CAP_ROUND
+	antialiased = true
+	default_color = Color.HOT_PINK
+	
 	add_point(Vector2(0,0))
 	add_point(Vector2(0,0))
+
 
 
 func _ready() -> void:
@@ -42,8 +48,9 @@ func _on_socket_change() -> void:
 
 
 func _update_points() -> void:
-	points[0] = origin.get_global_rect().get_center() if origin else Vector2.ZERO
-	points [1] = destination.get_global_rect().get_center() if destination else Vector2.ZERO
+	var offset := ProgManager.device.offset_node
+	points[0] = offset.to_local(origin.get_noodle_position()) if origin else Vector2.ZERO
+	points [1] = offset.to_local(destination.get_noodle_position()) if destination else Vector2.ZERO
 
 
 func _notification(what: int) -> void:
