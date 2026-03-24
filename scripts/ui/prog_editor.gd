@@ -57,8 +57,8 @@ func remove_noodle(noodle: Noodler) -> void:
 		if dest is ProgInputSocket:
 			(dest as ProgInputSocket).incoming_noodle = null
 	
-	noodle.queue_free()
 	cur_program.noodles.erase(noodle.data)
+	noodle.queue_free()
 
 
 func begin_noodle_preview(origin: ProgSocket, drag_target: Control) -> void:

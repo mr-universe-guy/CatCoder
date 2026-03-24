@@ -6,12 +6,15 @@ extends HBoxContainer
 const TEX_BOOL := preload("res://assets/kenney/ui/UIPack/icon_outline_circle.png")
 const TEX_NUMBER := preload("res://assets/kenney/ui/UIPack/icon_outline_square.png")
 
+signal transform_changed
+
 
 @export var socket_data : ProgSocketData:
 	set = _set_data
 	
 
 func _ready() -> void:
+	set_notify_transform(true)
 	_apply_data()
 
 
@@ -38,3 +41,8 @@ func _apply_data() -> void:
 			socket.texture = TEX_BOOL
 		ProgSocketData.DataType.NUMBER:
 			socket.texture = TEX_NUMBER
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSFORM_CHANGED:
+		transform_changed.emit()
