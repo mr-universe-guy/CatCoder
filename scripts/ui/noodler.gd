@@ -6,7 +6,7 @@ extends Line2D
 	set = _set_origin
 @export var destination : ProgSocket:
 	set = _set_destination
-
+var preview := false
 
 func _init() -> void:
 	begin_cap_mode = Line2D.LINE_CAP_ROUND
@@ -24,27 +24,48 @@ func _ready() -> void:
 
 
 func _set_origin(value: ProgSocket) -> void:
-	if origin and origin.transform_changed.is_connected(_on_socket_change):
-		origin.transform_changed.disconnect(_on_socket_change)
+	if origin:
+		if origin.transform_changed.is_connected(_on_socket_change):
+			origin.transform_changed.disconnect(_on_socket_change)
+		if origin.removed_from_canvas.is_connected(_on_socket_removed):
+			origin.removed_from_canvas.disconnect(_on_socket_removed)
 	origin = value
 	if not origin:
 		return
 	
 	origin.transform_changed.connect(_on_socket_change)
+	
+	if preview:
+		return
+	
+	origin.removed_from_canvas.connect(_on_socket_removed)
+	
 
 
 func _set_destination(value: ProgSocket) -> void:
-	if destination and destination.transform_changed.is_connected(_on_socket_change):
-		destination.transform_changed.disconnect(_on_socket_change)
+	if destination:
+		if destination.transform_changed.is_connected(_on_socket_change):
+			destination.transform_changed.disconnect(_on_socket_change)
+		if destination.removed_from_canvas.is_connected(_on_socket_removed):
+			destination.removed_from_canvas.disconnect(_on_socket_removed)
 	destination = value
 	if not destination:
 		return
 	
 	destination.transform_changed.connect(_on_socket_change)
+	
+	if preview:
+		return
+	
+	destination.removed_from_canvas.connect(_on_socket_removed)
 
 
 func _on_socket_change() -> void:
 	_update_points()
+
+## destroy self 
+func _on_socket_removed() -> void:
+	ProgManager.device.remove_noodle(data)
 
 
 func _update_points() -> void:

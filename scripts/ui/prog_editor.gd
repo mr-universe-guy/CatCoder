@@ -6,6 +6,9 @@ var _prog_block := preload("res://scenes/ui/prog_block.tscn")
 var cur_program: ProgData = ProgData.new() : 
 	set = _set_program
 
+var _block_map : Dictionary[ProgBlockData, ProgBlock] = {}
+var _noodle_map : Dictionary[NoodleData, Noodler] = {}
+
 @onready var _block_list : VBoxContainer = $VBoxContainer/GridContainer/ToolTabs/Blocks/VBox
 @onready var _block_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset/blocks
 @onready var _noodle_scene : Node2D = $VBoxContainer/GridContainer/block_working_area/block_area/offset/noodles
@@ -26,6 +29,7 @@ func _ready() -> void:
 	#register self with global progmanager
 	ProgManager.device = self
 	
+	_preview_noodle.preview = true
 	_noodle_scene.add_child(_preview_noodle)
 	
 	display_block_tools()
@@ -48,21 +52,32 @@ func add_noodle(data: NoodleData, origin: ProgSocket, destination: ProgSocket) -
 	noodle.origin = origin
 	noodle.destination = destination
 	
+	_noodle_map.set(data, noodle)
+	
 	_noodle_scene.add_child(noodle)
 	return noodle
 
 
-func remove_noodle(noodle: Noodler) -> void:
+func remove_noodle(data: NoodleData) -> void:
+	if not _noodle_map.has(data):
+		return
+	
+	var noodle := _noodle_map[data]
+	
 	if noodle.destination and noodle.destination is ProgSocket:
 		var dest := noodle.destination as ProgSocket
 		if dest is ProgInputSocket:
 			(dest as ProgInputSocket).incoming_noodle = null
 	
 	cur_program.noodles.erase(noodle.data)
+	_noodle_map.erase(data)
+	
 	noodle.queue_free()
 
 
-func begin_noodle_preview(origin: ProgSocket, drag_target: Control) -> void:
+func begin_noodle_preview(data: NoodleData, origin: ProgSocket, drag_target: Control) -> void:
+	#does this noodle already exist?
+	
 	if origin.socket_data.direction == ProgSocketData.Direction.IN:
 		_preview_noodle.destination = origin
 		_preview_noodle.origin = drag_target
@@ -78,7 +93,6 @@ func begin_noodle_preview(origin: ProgSocket, drag_target: Control) -> void:
 
 func end_noodle_preview() -> void:
 	_preview_noodle.hide()
-	
 	print("Noodle Preview End")
 
 #endregion

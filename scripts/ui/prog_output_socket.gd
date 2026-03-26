@@ -13,7 +13,7 @@ func _get_drag_data(_pos: Vector2) -> Variant:
 	var drag_target : Control = PREVIEW_SOCKET.instantiate()
 	set_drag_preview(drag_target)
 	
-	ProgManager.device.begin_noodle_preview(self, drag_target)
+	ProgManager.device.begin_noodle_preview(noodle_data, self, drag_target)
 	
 	return data_map
 

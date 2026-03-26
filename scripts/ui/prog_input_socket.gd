@@ -6,23 +6,28 @@ var incoming_noodle: Noodler
 
 func _get_drag_data(pos: Vector2) -> Variant:
 	var data_map := {}
-	var noodle_data := NoodleData.new()
-	data_map["noodle_data"] = noodle_data
+	var noodle_data : NoodleData
 	
 	var drag_target : ProgSocket = PREVIEW_SOCKET.instantiate()
 	set_drag_preview(drag_target)
 	
-	if incoming_noodle and incoming_noodle.origin is ProgSocket:
+	if incoming_noodle:
+		noodle_data = incoming_noodle.data
 		var origin := incoming_noodle.origin as ProgSocket
-		noodle_data.from_socket = origin.socket_data
 		data_map["origin_socket"] = origin
-		ProgManager.device.remove_noodle(incoming_noodle)
+		ProgManager.device.remove_noodle(noodle_data)
+		ProgManager.device.begin_noodle_preview(noodle_data, origin, drag_target)
 		incoming_noodle = null
-		ProgManager.device.begin_noodle_preview(origin, drag_target)
 	else:
-		noodle_data.to_socket = socket_data
+		noodle_data = NoodleData.new()
 		data_map["destination_socket"] = self
-		ProgManager.device.begin_noodle_preview(self, drag_target)
+		ProgManager.device.begin_noodle_preview(noodle_data, self, drag_target)
+	
+	data_map["noodle_data"] = noodle_data
+	
+	
+	
+	
 	
 	return data_map
 
@@ -53,7 +58,7 @@ func _drop_data(pos: Vector2, data: Variant) -> void:
 	var destination : ProgSocket
 	
 	if incoming_noodle:
-		ProgManager.device.remove_noodle(incoming_noodle)  
+		ProgManager.device.remove_noodle(incoming_noodle.data)  
 		incoming_noodle = null
 	
 	noodle.to_socket = socket_data

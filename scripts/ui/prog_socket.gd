@@ -4,6 +4,7 @@ extends HBoxContainer
 
 
 signal transform_changed
+signal removed_from_canvas
 
 const PREVIEW_SOCKET := preload("res://scenes/ui/preview_socket.tscn")
 
@@ -48,5 +49,8 @@ func get_noodle_position() -> Vector2:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_TRANSFORM_CHANGED:
-		transform_changed.emit()
+	match what:
+		NOTIFICATION_TRANSFORM_CHANGED:
+			transform_changed.emit()
+		NOTIFICATION_EXIT_CANVAS:
+			removed_from_canvas.emit()
