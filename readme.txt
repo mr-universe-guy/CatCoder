@@ -35,3 +35,11 @@ Another 5 minute wait. Her heartbeat was a drum against the back of her skull. S
 The device beeped and restarted itself. After another several minute wait, the screen flashed and text scrolled rapidly across before returning to the home screen. A picture of her and her mom stared up at her. There were several new apps splayed across the screen and a message from Mom.
 
 "I'm sorry, good luck."
+
+
+Cat Coder:
+Cat Coder is a visual programming / puzzle solving game where the player must
+unravel the mystery of the abandoned martian base.
+The player will install programs onto many devices including small drones, rovers,
+vending machines, security checkpoints, automated farms, fuel refineries and much more.
+Programs will be built out of visual programming blocks in a simplified, easy to learn format.
